@@ -1,8 +1,18 @@
 <template>
   <div id="app">
+    <toolbar></toolbar>
     <router-view/>
   </div>
 </template>
+
+<script>
+import toolbar from '@/views/toolbar/index'
+export default {
+  components: {
+    toolbar
+  }
+}
+</script>
 
 <style lang="scss">
 html,

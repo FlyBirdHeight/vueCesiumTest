@@ -26,7 +26,7 @@ export default {
           red: 0.45,
           green: 0.18,
           blue: 0.76,
-          alpha: 0.4
+          alpha: 0.4,
         },
         outlineShow: true,
         outline: {
@@ -42,18 +42,44 @@ export default {
     var Cesium = this.Cesium
     var cesiumContainer = document.getElementById('cesiumContainer')
     var viewer = new Cesium.Viewer('cesiumContainer', {
-      imageryProvider: new Cesium.UrlTemplateImageryProvider({
-        url: 'http://www.google.cn/maps/vt?lyrs=s&x={x}&y={y}&z={z}',
-      }),
+      infoBox: false,
+      geocoder: false, //控制右上角第一个位置的查找工具
+      homeButton: false, //控制右上角第二个位置的home图标
+      sceneModePicker: false, //控制右上角第三个位置的选择视角模式，2d，3d
+      baseLayerPicker: false, //控制右上角第四个位置的图层选择器
+      navigationHelpButton: false, //控制右上角第五个位置的导航帮助按钮
+      // animation:false,//控制左下角的动画器件
+      // timeline:false,//控制下方时间线
+      fullscreenButton: false, //右下角全屏按钮
     })
+    viewer.imageryLayers.addImageryProvider(
+      new Cesium.UrlTemplateImageryProvider({
+        url: 'https://mt1.google.cn/vt/lyrs=s&hl=zh-CN&x={x}&y={y}&z={z}&s=Gali',
+      })
+    )
+    // console.log(viewer);
+    this.$store.commit('SET_VIEWER', viewer)
     viewer._cesiumWidget._creditContainer.style.display = 'none'
     var box = viewer.entities.add({
       name: this.type.name,
-      position: new Cesium.Cartesian3.fromDegrees(this.type.position.east, this.type.position.north, this.type.position.height),
+      position: new Cesium.Cartesian3.fromDegrees(
+        this.type.position.east,
+        this.type.position.north,
+        this.type.position.height
+      ),
       box: {
-        dimensions: new Cesium.Cartesian3(this.type.dimensions.length, this.type.dimensions.width, this.type.dimensions.height),
+        dimensions: new Cesium.Cartesian3(
+          this.type.dimensions.length,
+          this.type.dimensions.width,
+          this.type.dimensions.height
+        ),
         fill: this.type.fillShow,
-        material: new Cesium.Color(this.type.material.red, this.type.material.green, this.type.material.blue, this.type.material.alpha),
+        material: new Cesium.Color(
+          this.type.material.red,
+          this.type.material.green,
+          this.type.material.blue,
+          this.type.material.alpha
+        ),
         outline: this.type.outlineShow,
         outlineColor: new Cesium.Color(this.type.outline.red, this.type.outline.green, this.type.outline.blue),
         show: this.type.show,
@@ -99,6 +125,19 @@ export default {
           viewer.zoomTo(viewer.entities)
       }
     },
+    /**
+     * 加载cesium黑色炫酷地图（地图资源问题未成功）
+     */
+    //layers.addImageryProvider(createCesiumLayer());
+    createCesiumLayer() {
+      var balckMarble = new Cesium.createTileMapServiceImageryProvider({
+        url: 'https://cesiumjs.org/blackmarble',
+        credit: 'Black Marble imagery courtesy NASA Earth Observatory',
+        flipXY: true,
+      })
+      balckMarble.splitDirection = Cesium.ImagerySplitDirection.LEFT
+      return balckMarble
+    },
   },
 }
 </script>
@@ -115,6 +154,6 @@ body,
   overflow: hidden;
 }
 .box {
-  height: 100%;
+  height: calc(100% - 60px);
 }
 </style>
