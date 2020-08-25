@@ -48,8 +48,8 @@ export default {
       sceneModePicker: false, //控制右上角第三个位置的选择视角模式，2d，3d
       baseLayerPicker: false, //控制右上角第四个位置的图层选择器
       navigationHelpButton: false, //控制右上角第五个位置的导航帮助按钮
-      // animation:false,//控制左下角的动画器件
-      // timeline:false,//控制下方时间线
+      animation:false,//控制左下角的动画器件
+      timeline:false,//控制下方时间线
       fullscreenButton: false, //右下角全屏按钮
     })
     viewer.imageryLayers.addImageryProvider(
@@ -57,6 +57,7 @@ export default {
         url: 'https://mt1.google.cn/vt/lyrs=s&hl=zh-CN&x={x}&y={y}&z={z}&s=Gali',
       })
     )
+    viewer.scene.debugShowFramesPerSecond = true;
     // console.log(viewer);
     this.$store.commit('SET_VIEWER', viewer)
     viewer._cesiumWidget._creditContainer.style.display = 'none'
