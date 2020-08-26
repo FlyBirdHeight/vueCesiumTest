@@ -4,41 +4,14 @@
   </div>
 </template>
 <script>
+import token from '@/config/token.js'
 export default {
   name: 'cesiumPage',
   data() {
-    return {
-      type: {
-        type: 'box',
-        name: 'first box',
-        position: {
-          east: 120.52,
-          north: 31.1,
-          height: 100.0,
-        },
-        dimensions: {
-          length: 50000.0,
-          width: 30000.0,
-          height: 10000.0,
-        },
-        fillShow: true,
-        material: {
-          red: 0.45,
-          green: 0.18,
-          blue: 0.76,
-          alpha: 0.4,
-        },
-        outlineShow: true,
-        outline: {
-          red: 1,
-          green: 1,
-          blue: 1,
-        },
-        show: true,
-      },
-    }
+    return {}
   },
   mounted() {
+    var TDU_Key = token
     var Cesium = this.Cesium
     var cesiumContainer = document.getElementById('cesiumContainer')
     var viewer = new Cesium.Viewer('cesiumContainer', {
@@ -48,98 +21,83 @@ export default {
       sceneModePicker: false, //控制右上角第三个位置的选择视角模式，2d，3d
       baseLayerPicker: false, //控制右上角第四个位置的图层选择器
       navigationHelpButton: false, //控制右上角第五个位置的导航帮助按钮
-      animation:false,//控制左下角的动画器件
-      timeline:false,//控制下方时间线
+      animation: false, //控制左下角的动画器件
+      timeline: false, //控制下方时间线
       fullscreenButton: false, //右下角全屏按钮
+      shouldAnimate: true,
+      selectionIndicator: true,
     })
-    viewer.imageryLayers.addImageryProvider(
-      new Cesium.UrlTemplateImageryProvider({
-        url: 'https://mt1.google.cn/vt/lyrs=s&hl=zh-CN&x={x}&y={y}&z={z}&s=Gali',
-      })
-    )
-    viewer.scene.debugShowFramesPerSecond = true;
-    // console.log(viewer);
-    this.$store.commit('SET_VIEWER', viewer)
+    //在线天地图影像服务地址(墨卡托投影)
+    var TDT_IMG_W =
+      'http://{s}.tianditu.gov.cn/img_w/wmts?service=wmts&request=GetTile&version=1.0.0' +
+      '&LAYER=img&tileMatrixSet=w&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}' +
+      '&style=default&format=tiles&tk=' +
+      TDU_Key
+    //在线天地图影像中文标记服务(墨卡托投影)
+    var TDT_CIA_W =
+      'http://{s}.tianditu.gov.cn/cia_w/wmts?service=wmts&request=GetTile&version=1.0.0' +
+      '&LAYER=cia&tileMatrixSet=w&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}' +
+      '&style=default.jpg&tk=' +
+      TDU_Key
+    //在线天地图影像国境线标记服务(墨卡托投影)
+    var TDT_IBO_W =
+      'http://{s}.tianditu.gov.cn/ibo_w/wmts?service=wmts&request=GetTile&version=1.0.0' +
+      '&LAYER=ibo&tileMatrixSet=w&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}' +
+      '&style=default.jpg&tk=' +
+      TDU_Key
+
+    let Img = new Cesium.WebMapTileServiceImageryProvider({
+      //调用影响中文服务
+      url: TDT_IMG_W, //url地址
+      layer: 'img_w', //WMTS请求的层名称
+      style: 'default', //WMTS请求的样式名称
+      format: 'tiles', //MIME类型，用于从服务器检索图像
+      tileMatrixSetID: 'GoogleMapsCompatible', //	用于WMTS请求的TileMatrixSet的标识符
+      subdomains: ['t0', 't1', 't2', 't3', 't4', 't5', 't6', 't7'], //天地图8个服务器
+      minimumLevel: 0, //最小层级
+      maximumLevel: 18, //最大层级
+    })
+    viewer.imageryLayers.addImageryProvider(Img) //添加到cesium图层上
+
+    let cia = new Cesium.WebMapTileServiceImageryProvider({
+      //调用影响中文注记服务
+      url: TDT_CIA_W,
+      layer: 'cia_w',
+      style: 'default',
+      format: 'tiles',
+      tileMatrixSetID: 'GoogleMapsCompatible',
+      subdomains: ['t0', 't1', 't2', 't3', 't4', 't5', 't6', 't7'], //天地图8个服务器
+      minimumLevel: 0,
+      maximumLevel: 18,
+    })
+    viewer.imageryLayers.addImageryProvider(cia)
+
+    let ibo = new Cesium.WebMapTileServiceImageryProvider({
+      //调用影响中文注记服务
+      url: TDT_IBO_W,
+      layer: 'ibo_w',
+      style: 'default',
+      format: 'tiles',
+      tileMatrixSetID: 'GoogleMapsCompatible',
+      subdomains: ['t0', 't1', 't2', 't3', 't4', 't5', 't6', 't7'], //天地图8个服务器
+      minimumLevel: 0,
+      maximumLevel: 18,
+    })
+    viewer.imageryLayers.addImageryProvider(ibo)
+
     viewer._cesiumWidget._creditContainer.style.display = 'none'
-    var box = viewer.entities.add({
-      name: this.type.name,
-      position: new Cesium.Cartesian3.fromDegrees(
-        this.type.position.east,
-        this.type.position.north,
-        this.type.position.height
-      ),
-      box: {
-        dimensions: new Cesium.Cartesian3(
-          this.type.dimensions.length,
-          this.type.dimensions.width,
-          this.type.dimensions.height
-        ),
-        fill: this.type.fillShow,
-        material: new Cesium.Color(
-          this.type.material.red,
-          this.type.material.green,
-          this.type.material.blue,
-          this.type.material.alpha
-        ),
-        outline: this.type.outlineShow,
-        outlineColor: new Cesium.Color(this.type.outline.red, this.type.outline.green, this.type.outline.blue),
-        show: this.type.show,
+    viewer.scene.debugShowFramesPerSecond = true
+    viewer.camera.flyTo({
+      destination: this.Cesium.Cartesian3.fromDegrees(103.84, 31.15, 17850000),
+      orientation: {
+        heading: this.Cesium.Math.toRadians(348.4202942851978),
+        pitch: this.Cesium.Math.toRadians(-89.74026687972041),
+        roll: this.Cesium.Math.toRadians(0),
       },
     })
-    viewer.zoomTo(viewer.entities)
+    this.$store.commit('SET_VIEWER', viewer)
   },
-  methods: {
-    createEntities(viewer, type) {
-      switch (type.type) {
-        case 'polyline':
-          viewer.entities.add({})
-          break
-        case 'polyson':
-          break
-        case 'box':
-          var box = viewer.entities.add({
-            name: type.name,
-            position: new Cesium.Cartesian3.fromDegrees(type.position.east, type.position.north, type.position.height),
-            box: {
-              dimensions: new Cesium.Cartesian3(type.dimensions.length, type.dimensions.width, type.dimensions.height),
-              fill: type.fillShow,
-              material: new Cesium.Color(
-                type.material.red,
-                type.material.green,
-                type.material.blue,
-                type.material.alpha
-              ),
-              outline: type.outlineShow,
-              outlineColor: new Cesium.Color(type.outline.red, type.outline.green, type.outline.blue),
-              show: type.show,
-            },
-          })
-          break
-        case 'cylinder':
-          break
-        case 'billboard':
-          break
-        case 'ellipse':
-          break
-        default:
-          break
-          viewer.zoomTo(viewer.entities)
-      }
-    },
-    /**
-     * 加载cesium黑色炫酷地图（地图资源问题未成功）
-     */
-    //layers.addImageryProvider(createCesiumLayer());
-    createCesiumLayer() {
-      var balckMarble = new Cesium.createTileMapServiceImageryProvider({
-        url: 'https://cesiumjs.org/blackmarble',
-        credit: 'Black Marble imagery courtesy NASA Earth Observatory',
-        flipXY: true,
-      })
-      balckMarble.splitDirection = Cesium.ImagerySplitDirection.LEFT
-      return balckMarble
-    },
-  },
+  methods: {},
 }
 </script>
 

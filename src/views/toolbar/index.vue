@@ -49,8 +49,6 @@ export default {
             },
           })
           this.$store.commit('SET_VIEWER', viewer)
-          console.log(123)
-          //   Camera.DEFAULT_VIEW_RECTANGLE = Rectangle.fromDegrees(89.5, 20.4, 110.4, 61.2);
           break
         default:
           break
