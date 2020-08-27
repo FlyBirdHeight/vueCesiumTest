@@ -13,6 +13,9 @@ var widgets= require('cesium/Widgets/widgets.css');
 Vue.prototype.Cesium = Cesium
 Vue.prototype.widgets = widgets
 
+import axios from 'axios'
+Vue.prototype.axios = axios
+
 Vue.config.productionTip = false;
 
 new Vue({

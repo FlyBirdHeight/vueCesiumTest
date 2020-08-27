@@ -1,4 +1,7 @@
-<template> </template>
+<!-- 盒子 -->
+<template> 
+
+</template>
 
 <script>
 export default {

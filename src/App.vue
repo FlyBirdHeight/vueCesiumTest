@@ -2,14 +2,20 @@
   <div id="app">
     <toolbar></toolbar>
     <router-view/>
+    <left-side></left-side>
+    <right-side></right-side>
   </div>
 </template>
 
 <script>
 import toolbar from '@/views/toolbar/index'
+import LeftSide from '@/views/toolbar/LeftSide'
+import RightSide from '@/views/toolbar/RightSide'
 export default {
   components: {
-    toolbar
+    toolbar,
+    LeftSide,
+    RightSide
   }
 }
 </script>

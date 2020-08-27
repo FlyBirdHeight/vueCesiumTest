@@ -18,7 +18,16 @@ module.exports = {
     host: "0.0.0.0",
     port: 5000,
     https: false,
-    hotOnly: false
+    hotOnly: false,
+    // proxy: {
+    //   '/position': {
+    //     target: 'http://api.tianditu.gov.cn',
+    //     changeOrigin: true,
+    //     pathRewrite: {
+    //       '^/position': ''
+    //     }
+    //   }
+    // },
   },
   configureWebpack: {
     output: {

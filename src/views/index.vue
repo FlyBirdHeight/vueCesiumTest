@@ -27,6 +27,7 @@ export default {
       shouldAnimate: true,
       selectionIndicator: true,
     })
+    viewer._cesiumWidget._creditContainer.style.display = 'none'
     //在线天地图影像服务地址(墨卡托投影)
     var TDT_IMG_W =
       'http://{s}.tianditu.gov.cn/img_w/wmts?service=wmts&request=GetTile&version=1.0.0' +
@@ -84,20 +85,52 @@ export default {
       maximumLevel: 18,
     })
     viewer.imageryLayers.addImageryProvider(ibo)
-
-    viewer._cesiumWidget._creditContainer.style.display = 'none'
+    this.seeChina(viewer)
+    this.clickForPosition(viewer)
     viewer.scene.debugShowFramesPerSecond = true
-    viewer.camera.flyTo({
-      destination: this.Cesium.Cartesian3.fromDegrees(103.84, 31.15, 17850000),
-      orientation: {
-        heading: this.Cesium.Math.toRadians(348.4202942851978),
-        pitch: this.Cesium.Math.toRadians(-89.74026687972041),
-        roll: this.Cesium.Math.toRadians(0),
-      },
-    })
     this.$store.commit('SET_VIEWER', viewer)
   },
-  methods: {},
+  methods: {
+    clickForPosition(viewer) {
+      var Cesium = this.Cesium
+      this.handler.setInputAction(function(mouse) {
+        //地标坐标：获取点击处地球表面的世界坐标，不包括模型、倾斜摄影表面
+        // var ray = viewer.camera.getPickRay(mouse.position)
+        // var earthPosition = viewer.scene.globe.pick(ray, viewer.scene)
+
+        viewer.scene.pick(mouse.position)
+        var ray = viewer.camera.getPickRay(mouse.position)
+        var globe = viewer.scene.globe
+        var cartesian = globe.pick(ray, viewer.scene)
+        if (!Cesium.defined(cartesian)) {
+          return
+        }
+        //维度
+        var cartographic = Cesium.Cartographic.fromCartesian(cartesian)
+        var latitude = Cesium.Math.toDegrees(cartographic.latitude).toFixed(4)
+        //经度
+        var longitude = Cesium.Math.toDegrees(cartographic.longitude).toFixed(4)
+      }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
+    },
+    seeChina(viewer) {
+      viewer.camera.flyTo({
+        destination: this.Cesium.Cartesian3.fromDegrees(103.84, 31.15, 7000000),
+        orientation: {
+          heading: this.Cesium.Math.toRadians(348.4202942851978),
+          pitch: this.Cesium.Math.toRadians(-89.74026687972041),
+          roll: this.Cesium.Math.toRadians(0),
+        },
+      })
+      this.$store.commit('SET_VIEWER', viewer)
+    },
+    initViewer() {},
+  },
+  computed: {
+    handler() {
+      var Cesium = this.Cesium
+      return new Cesium.ScreenSpaceEventHandler(this.$store.state.viewer.viewer.scene.canvas)
+    },
+  },
 }
 </script>
 
