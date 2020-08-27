@@ -37,10 +37,12 @@
 
 <script>
 import token from '@/config/token.js'
+// import billboard from '@/czml/billboard.js'
 export default {
   methods: {
     handleSelect(key, keyPath) {
       var viewer = this.$store.state.viewer.viewer
+      billboard()
       switch (key) {
         case '1':
           break
@@ -85,6 +87,7 @@ export default {
     },
     cameraFlyTo() {
       var viewer = this.$store.state.viewer.viewer
+      viewer.dataSources.removeAll()
       viewer.camera.flyTo({
         destination: this.Cesium.Cartesian3.fromDegrees(this.position.lon, this.position.lat, 1000),
         orientation: {
@@ -92,6 +95,7 @@ export default {
           pitch: this.Cesium.Math.toRadians(-89.74026687972041),
           roll: this.Cesium.Math.toRadians(0),
         },
+        complete: this.addBillboard,
       })
       this.$store.commit('SET_VIEWER', viewer)
     },
@@ -103,11 +107,11 @@ export default {
       this.map.clearOverLays()
       this.position.name = item.name
       this.position.address = item.address
-      var ds = { keyWord: this.position.name }
+      var ds = { keyWord: this.position.address + this.position.name }
       this.axios
         .get('http://api.tianditu.gov.cn/geocoder?ds=' + JSON.stringify(ds) + '}&tk=' + token)
         .then((res) => {
-          if (res.data.status == "0" && res.data.msg == "ok") {
+          if (res.data.status == '0' && res.data.msg == 'ok') {
             this.position.lon = res.data.location.lon
             this.position.lat = res.data.location.lat
           } else {
@@ -117,6 +121,29 @@ export default {
         .catch((error) => {
           this.$message.error('地址解析出错，请精确地址信息')
         })
+    },
+    addBillboard() {
+      var postionPoint = [this.position.lon, this.position.lat, 20]
+      var czml = [
+        {
+          id: 'document',
+          name: 'Position Point',
+          version: '1.0',
+        },
+        {
+          id: 'navigation_point_first',
+          name: '地址搜索标点',
+          position: {
+            cartographicDegrees: postionPoint,
+          },
+          description: '地址搜索完成后，在目的地上标下点',
+          billboard: {
+            image: 'http://img.xslease.com/position_point.png',
+            scale: 1.0,
+          },
+        },
+      ]
+      this.$store.state.viewer.viewer.dataSources.add(this.Cesium.CzmlDataSource.load(czml))
     },
   },
   data() {
