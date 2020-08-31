@@ -5,10 +5,11 @@ import router from "./router";
 import store from "./store";
 
 import billboard from './plugin/billboard'
-import shpere from './plugin/shpere'
-
+import sphere from './plugin/sphere'
+import camera from './plugin/camera'
 Vue.use(billboard);
-Vue.use(shpere);
+Vue.use(sphere);
+Vue.use(camera);
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';

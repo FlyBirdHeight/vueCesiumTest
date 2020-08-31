@@ -24,7 +24,6 @@ import token from "@/config/token.js";
 export default {
     methods: {
         handleSelect(key, keyPath) {
-            var viewer = this.$store.state.viewer.viewer;
             switch (key) {
                 case "1":
                     break;
@@ -37,7 +36,7 @@ export default {
                 case "5":
                     break;
                 case "6":
-                    viewer.camera.flyTo({
+                    this.viewer.camera.flyTo({
                         destination: this.Cesium.Cartesian3.fromDegrees(
                             103.84,
                             31.15,
@@ -49,7 +48,7 @@ export default {
                             roll: this.Cesium.Math.toRadians(0)
                         }
                     });
-                    this.$store.commit("SET_VIEWER", viewer);
+                    this.$store.commit("SET_VIEWER", this.viewer);
                     break;
                 default:
                     break;
@@ -72,11 +71,9 @@ export default {
             }
         },
         cameraFlyTo() {
-            if (this.billboard != null) {
-                this.viewer.dataSources.remove(this.billboard);
-                this.billboard = null;
-            }
-            this.viewer.camera.flyTo({
+            let view = this.viewer;
+            this.destoryBillboard(view)
+            view.camera.flyTo({
                 destination: this.Cesium.Cartesian3.fromDegrees(
                     this.position.lon,
                     this.position.lat,
@@ -89,7 +86,7 @@ export default {
                 },
                 complete: this.addBillboard
             });
-            this.$store.commit("SET_VIEWER", this.viewer);
+            this.$store.commit("SET_VIEWER", view);
         },
         localSearchResult(result) {
             this.map.clearOverLays();
@@ -122,28 +119,7 @@ export default {
                 });
         },
         addBillboard() {
-            this.createBillboard(this.position);
-            var postionPoint = [this.position.lon, this.position.lat, 20];
-            var czml = [{
-                    id: "document",
-                    name: "Position Point",
-                    version: "1.0"
-                },
-                {
-                    id: "navigation_point_first",
-                    name: "地址搜索标点",
-                    position: {
-                        cartographicDegrees: postionPoint
-                    },
-                    description: "地址搜索完成后，在目的地上标下点",
-                    billboard: {
-                        image: "http://img.xslease.com/position_point.png",
-                        scale: 1.0
-                    }
-                }
-            ];
-            this.billboard = this.Cesium.CzmlDataSource.load(czml);
-            this.viewer.dataSources.add(this.billboard);
+            this.createBillboard(this.position, this.viewer);
         }
     },
     data() {
@@ -159,10 +135,14 @@ export default {
             map: null,
             showData: null,
             geoCoder: null,
-            viewer: this.$store.state.viewer.viewer,
             billboard: null
         };
-    }
+    },
+    computed: {
+        viewer: function () {
+            return this.$store.state.viewer.viewer
+        }
+    },
 };
 </script>
 
