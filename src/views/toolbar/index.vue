@@ -72,7 +72,7 @@ export default {
         },
         cameraFlyTo() {
             let view = this.viewer;
-            this.destoryBillboard(view)
+            this.removeSphereByEntity(view)
             view.camera.flyTo({
                 destination: this.Cesium.Cartesian3.fromDegrees(
                     this.position.lon,
@@ -84,7 +84,7 @@ export default {
                     pitch: this.Cesium.Math.toRadians(-89.74026687972041),
                     roll: this.Cesium.Math.toRadians(0)
                 },
-                complete: this.addBillboard
+                complete: this.addSphere
             });
             this.$store.commit("SET_VIEWER", view);
         },
@@ -118,8 +118,8 @@ export default {
                     this.$message.error("地址解析出错，请精确地址信息");
                 });
         },
-        addBillboard() {
-            this.createBillboard(this.position, this.viewer);
+        addSphere() {
+            this.createSphereByEntity(this.position, this.viewer);
         }
     },
     data() {
@@ -135,7 +135,6 @@ export default {
             map: null,
             showData: null,
             geoCoder: null,
-            billboard: null
         };
     },
     computed: {
