@@ -72,7 +72,7 @@ export default {
         },
         cameraFlyTo() {
             let view = this.viewer;
-            this.removeSphereByEntity(view)
+            this.destoryBillboard(view)
             view.camera.flyTo({
                 destination: this.Cesium.Cartesian3.fromDegrees(
                     this.position.lon,
@@ -119,7 +119,7 @@ export default {
                 });
         },
         addSphere() {
-            this.createSphereByEntity(this.position, this.viewer);
+            this.createBillboard(this.position, this.viewer);
         }
     },
     data() {

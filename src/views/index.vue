@@ -22,14 +22,15 @@ export default {
             sceneModePicker: false, //控制右上角第三个位置的选择视角模式，2d，3d
             baseLayerPicker: false, //控制右上角第四个位置的图层选择器
             navigationHelpButton: false, //控制右上角第五个位置的导航帮助按钮
-            animation: false, //控制左下角的动画器件
-            // timeline: false, //控制下方时间线
+            animation: true, //控制左下角的动画器件
+            timeline: true, //控制下方时间线
             fullscreenButton: false, //右下角全屏按钮
             shouldAnimate: true,
             selectionIndicator: true,
             terrainProvider: Cesium.createWorldTerrain()
         });
         viewer.timeline.container.style.display = 'none';
+        viewer.animation.container.style.display = 'none'
         viewer._cesiumWidget._creditContainer.style.display = "none";
         //在线天地图影像服务地址(墨卡托投影)
         var TDT_IMG_W =
