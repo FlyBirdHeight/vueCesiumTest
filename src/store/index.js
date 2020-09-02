@@ -1,11 +1,13 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import viewer from "./modules/viewer.js"
-import position from "./modules/position.js"
 import mutations from './mutations_type'
 import actions from './actions'
 import getters from './getters'
 import state from './state'
+import viewer from "./modules/viewer.js"
+import position from "./modules/position.js"
+import leftSide from "./modules/leftSide.js"
+import rightSide from "./modules/rightSide.js"
 
 Vue.use(Vuex);
 
@@ -20,6 +22,8 @@ export default new Vuex.Store({
   actions,
   modules: {
     viewer,
-    position
+    position,
+    leftSide,
+    rightSide
   }
 });

@@ -6,6 +6,7 @@
     <el-menu-item index="4">设置地形</el-menu-item>
     <el-menu-item index="5">设置运动轨迹</el-menu-item>
     <el-menu-item index="6">恢复视角位置</el-menu-item>
+    <el-menu-item index="7">添加图层</el-menu-item>
     <div class="select-input">
         <el-autocomplete v-model="position.name" :fetch-suggestions="searchPosition" placeholder="输入查找地名" style="weight:200px" @select="clickPosition">
             <template slot-scope="{ item }">
@@ -28,8 +29,13 @@ export default {
                 case "1":
                     break;
                 case "2":
+                    this.$store.commit("SET_LEFT_TITLE", "几何体设置");
+                    this.$store.commit("SET_LEFT_DRAWER", new Boolean(true));
+                    this.$store.commit("SET_LEFT_SUB_TITLE", "几何体添加");
                     break;
                 case "3":
+                    this.$store.commit("SET_LEFT_TITLE", "添加czml文件");
+                    this.$store.commit("SET_LEFT_DRAWER", new Boolean(true));
                     break;
                 case "4":
                     break;
@@ -49,6 +55,8 @@ export default {
                         }
                     });
                     this.$store.commit("SET_VIEWER", this.viewer);
+                    break;
+                case "7":
                     break;
                 default:
                     break;
@@ -72,7 +80,7 @@ export default {
         },
         cameraFlyTo() {
             let view = this.viewer;
-            this.destoryBillboard(view)
+            this.destoryBillboard(view);
             view.camera.flyTo({
                 destination: this.Cesium.Cartesian3.fromDegrees(
                     this.position.lon,
@@ -134,14 +142,14 @@ export default {
             },
             map: null,
             showData: null,
-            geoCoder: null,
+            geoCoder: null
         };
     },
     computed: {
         viewer: function () {
-            return this.$store.state.viewer.viewer
+            return this.$store.state.viewer.viewer;
         }
-    },
+    }
 };
 </script>
 

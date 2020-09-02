@@ -26,10 +26,6 @@ function completeFlight(viewer) {
 function getMagnitude(viewer) {
 
 }
-//获取摄像机位置的大小
-function getMagnitude(viewer) {
-
-}
 
 export default {
     install: function (Vue) {

@@ -1,43 +1,36 @@
-<!--- 右侧边展开栏 --->
 <template>
-  <el-drawer :title="title" :visible.sync="drawer" direction="ltr" size="45%">
-    <div>
-      <el-button @click="innerDrawer = true">{{ subTitle }}</el-button>
-      <el-drawer :title="subTitle" :append-to-body="true" :before-close="handleClose" :visible.sync="innerDrawer">
+<el-drawer :title="$store.state.leftSide.title" direction="ltr" :modal="false" :visible.sync="$store.state.leftSide.drawer" size="45%">
+    <geometry @innerDrawer="setInnerDrawer"></geometry>
+    <el-drawer :title="$store.state.leftSide.subTitle" :append-to-body="true" :before-close="handleClose" :visible.sync="innerDrawer">
         <p>_(:зゝ∠)_</p>
-      </el-drawer>
-    </div>
-  </el-drawer>
+    </el-drawer>
+</el-drawer>
 </template>
 
 <script>
+import geometry from "../geometry/index";
 export default {
-  props: {
-    title: {
-      type: String,
-      default: '默认',
+    data() {
+        return {
+            innerDrawer: false
+        };
     },
-    subTitle: {
-      type: String,
-      default: '默认',
+    methods: {
+        setInnerDrawer() {
+            this.innerDrawer = true;
+        },
+        handleClose() {
+            this.innerDrawer = false;
+        }
     },
-    drawer: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  data() {
-    return {
-      innerDrawer: false,
+    components: {
+        geometry
     }
-  },
-  methods: {
-    handleClose() {
-        console.log(123);
-    },
-  },
-  components: {},
-}
+};
 </script>
 
-<style></style>
+<style>
+.el-drawer.rtl {
+    background: rgba(255, 255, 255, 0.8);
+}
+</style>
