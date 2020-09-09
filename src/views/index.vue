@@ -97,11 +97,9 @@ export default {
     methods: {
         clickForPosition(viewer) {
             var Cesium = this.Cesium;
+            var store = this.$store;
             this.handler.setInputAction(function (mouse) {
                 //地标坐标：获取点击处地球表面的世界坐标，不包括模型、倾斜摄影表面
-                // var ray = viewer.camera.getPickRay(mouse.position)
-                // var earthPosition = viewer.scene.globe.pick(ray, viewer.scene)
-
                 viewer.scene.pick(mouse.position);
                 var ray = viewer.camera.getPickRay(mouse.position);
                 var globe = viewer.scene.globe;
@@ -116,16 +114,23 @@ export default {
                 var longitude = Cesium.Math.toDegrees(cartographic.longitude).toFixed(
                     4
                 );
+                if (store.state.geometryForm.selectPostion) {
+                    store.commit('SET_LAT', latitude);
+                    store.commit('SET_LON', longitude);
+                    store.commit('SET_LEFT_DRAWER', true);
+                    store.commit('SET_LEFT_INNERDRAWER', true);
+                    store.commit('SET_SELECT_POSITION', false);
+                }
             }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
         },
         seeChina(viewer) {
-            viewer.camera.flyTo({
+            viewer.camera.setView({
                 destination: this.Cesium.Cartesian3.fromDegrees(103.84, 31.15, 7000000),
-                orientation: {
-                    heading: this.Cesium.Math.toRadians(348.4202942851978),
-                    pitch: this.Cesium.Math.toRadians(-89.74026687972041),
-                    roll: this.Cesium.Math.toRadians(0)
-                }
+                // orientation: {
+                //     heading: this.Cesium.Math.toRadians(348.4202942851978),
+                //     pitch: this.Cesium.Math.toRadians(-89.74026687972041),
+                //     roll: this.Cesium.Math.toRadians(0)
+                // }
             });
             this.$store.commit("SET_VIEWER", viewer);
         },

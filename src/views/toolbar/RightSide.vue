@@ -1,7 +1,7 @@
 <template>
-<el-drawer :title="$store.state.leftSide.title" direction="ltr" :modal="false" :visible.sync="$store.state.leftSide.drawer" size="45%">
+<el-drawer :title="$store.state.rightSide.title" direction="ltr" :modal="false" :visible.sync="$store.state.rightSide.drawer" size="45%">
     <geometry @innerDrawer="setInnerDrawer"></geometry>
-    <el-drawer :title="$store.state.leftSide.subTitle" :append-to-body="true" :before-close="handleClose" :visible.sync="innerDrawer">
+    <el-drawer :title="$store.state.rightSide.subTitle" :append-to-body="true" :before-close="handleClose" :visible.sync="innerDrawer">
         <p>_(:зゝ∠)_</p>
     </el-drawer>
 </el-drawer>
@@ -29,7 +29,11 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+/deep/ :focus {
+    outline: 0;
+}
+</style><style>
 .el-drawer.rtl {
     background: rgba(255, 255, 255, 0.8);
 }

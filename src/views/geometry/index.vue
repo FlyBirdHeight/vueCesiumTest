@@ -28,12 +28,6 @@
 
 <script>
 export default {
-    props: {
-        innerDrawer: {
-            type: Boolean,
-            default: false,
-        }
-    },
     data() {
         return {
             tableData: [{
@@ -51,10 +45,10 @@ export default {
     },
     methods: {
         setButton() {
-            this.$emit('innerDrawer', new Boolean(true));
+            this.$store.commit('SET_LEFT_INNERDRAWER', true)
         },
         handleClose() {
-            this.innerDrawer = false;
+            this.$store.commit('SET_LEFT_INNERDRAWER', false)
         },
         flyToGeometry() {
             console.log();

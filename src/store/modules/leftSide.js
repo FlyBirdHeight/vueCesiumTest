@@ -3,6 +3,8 @@ const leftSide = {
         title: "默认",
         subTitle: "默认",
         drawer: false,
+        type: String,
+        innerDrawer: false,
     },
 
     mutations: {
@@ -14,6 +16,12 @@ const leftSide = {
         },
         SET_LEFT_DRAWER: (state, code) => {
             state.drawer = code;
+        },
+        SET_LEFT_TYPE: (state, code) => {
+            state.type = code;
+        },
+        SET_LEFT_INNERDRAWER: (state, code) => {
+            state.innerDrawer = code;
         },
     },
 }

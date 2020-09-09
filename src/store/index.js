@@ -8,6 +8,7 @@ import viewer from "./modules/viewer.js"
 import position from "./modules/position.js"
 import leftSide from "./modules/leftSide.js"
 import rightSide from "./modules/rightSide.js"
+import geometryForm from "./modules/geometry_form.js"
 
 Vue.use(Vuex);
 
@@ -24,6 +25,7 @@ export default new Vuex.Store({
     viewer,
     position,
     leftSide,
-    rightSide
+    rightSide,
+    geometryForm
   }
 });

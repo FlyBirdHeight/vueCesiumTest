@@ -32,10 +32,12 @@ export default {
                     this.$store.commit("SET_LEFT_TITLE", "几何体设置");
                     this.$store.commit("SET_LEFT_DRAWER", new Boolean(true));
                     this.$store.commit("SET_LEFT_SUB_TITLE", "几何体添加");
+                    this.$store.commit("SET_LEFT_TYPE", "geometry");
                     break;
                 case "3":
                     this.$store.commit("SET_LEFT_TITLE", "添加czml文件");
                     this.$store.commit("SET_LEFT_DRAWER", new Boolean(true));
+                    this.$store.commit("SET_LEFT_TYPE", "czml");
                     break;
                 case "4":
                     break;

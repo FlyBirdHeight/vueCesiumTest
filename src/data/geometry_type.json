@@ -1,0 +1,60 @@
+{
+    "geometryType": [
+        {
+            "value": "billboard",
+            "label": "电子板"
+        },
+        {
+            "value": "ellipsoid",
+            "label": "椭球体(可设置圆球体)"
+        },
+        {
+            "value": "label",
+            "label": "文字"
+        },
+        {
+            "value": "point",
+            "label": "点"
+        },
+        {
+            "value": "polygon",
+            "label": "多边形"
+        },
+        {
+            "value": "rectangle",
+            "label": "矩形(可设置长方体)"
+        },
+        {
+            "value": "wall",
+            "label": "墙体"
+        },
+        {
+            "value": "cylinder",
+            "label": "圆柱体"
+        },
+        {
+            "value": "corridor",
+            "label": "廊道"
+        },
+        {
+            "value": "box",
+            "label": "盒子"
+        }
+    ],
+    "billboard": {
+        "image":"",
+        "scale":"",
+        "verticalOrigin":"",
+        "pixelOffset":"",
+        "horizontalOrigin":"",
+        "color":""
+    },
+    "box": {},
+    "ellipsoid": {},
+    "label": {},
+    "polygon": {},
+    "rectangle": {},
+    "wall": {},
+    "cylinder": {},
+    "corridor": {}
+}
