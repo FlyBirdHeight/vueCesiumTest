@@ -43,11 +43,14 @@
     ],
     "billboard": {
         "image":"",
-        "scale":"",
-        "verticalOrigin":"",
-        "pixelOffset":"",
-        "horizontalOrigin":"",
-        "color":""
+        "scale":"1.0",
+        "verticalOrigin":"CENTER",
+        "pixelOffset":{
+            "x": 0.0,
+            "y": 0.0
+        },
+        "horizontalOrigin":"CENTER",
+        "color":"rgba(255, 69, 0, 0.68)"
     },
     "box": {},
     "ellipsoid": {},

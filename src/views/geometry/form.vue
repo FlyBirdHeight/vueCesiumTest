@@ -1,5 +1,5 @@
 <template>
-<el-form ref="form" size="mini" :model="form" :label-position="'top'" style="padding:15px" :hide-required-asterisk="true">
+<el-form ref="form" size="mini" :model="form" :label-position="'top'" style="padding:15px">
     <el-form-item label="创建类型" class="clearBottom">
         <el-select v-model="form.type" clearable placeholder="请选择">
             <el-option v-for="geometry in geometryType" :key="geometry.value" :label="geometry.label" :value="geometry.value"></el-option>
@@ -31,12 +31,17 @@
         <el-radio v-model="form.show" :label="true" border>显示</el-radio>
         <el-radio v-model="form.show" :label="false" border>不显示</el-radio>
     </el-form-item>
-
+    <billboard v-if="form.type == 'billboard'"></billboard>
+    <el-form-item>
+        <el-button type="primary" @click="onSubmit">立即创建</el-button>
+        <el-button @click="resetForm">取消</el-button>
+    </el-form-item>
 </el-form>
 </template>
 
 <script>
 import type from "@/data/geometry_type.json";
+import billboard from "@/views/geometry/form/billboard";
 export default {
     data() {
         return {
@@ -67,9 +72,29 @@ export default {
                 type: "info",
                 offset: 60
             });
+        },
+        onSubmit() {
+            console.log(this.form);
+        },
+        resetForm() {
+            this.form = {
+                type: "",
+                position: {
+                    lon: "",
+                    lat: ""
+                },
+                height: "",
+                name: "",
+                description: "",
+                image: "",
+                show: true,
+                id: ""
+            }
         }
     },
-    computed: {}
+    components: {
+        billboard
+    }
 };
 </script>
 
