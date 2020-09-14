@@ -36,12 +36,20 @@
 </template>
 
 <script>
-import geometry from "@/data/geometry_type.json";
 import config from "@/data/geometry_config.json";
 export default {
+    props: {
+        submitForm: {
+            type: Boolean,
+            default: false,
+        },
+        billboard: {
+            type: Object,
+            default: {}
+        }
+    },
     data() {
         return {
-            billboard: geometry.billboard,
             predefineColors: config.billboard.color,
             horizontal: config.billboard.horizontalOrigin,
             vertical: config.billboard.verticalOrigin
@@ -51,7 +59,20 @@ export default {
         handleSuccess(res, file) {
             this.billboard.image = res.response;
         },
-    }
+        handleData() {
+
+        }
+    },
+    watch: {
+        submitForm: {
+            immediate: true,
+            handler: function (newV, oldV) {
+                if (newV) {
+                    console.log('hello world')
+                }
+            }
+        }
+    },
 };
 </script>
 

@@ -31,7 +31,7 @@
         <el-radio v-model="form.show" :label="true" border>显示</el-radio>
         <el-radio v-model="form.show" :label="false" border>不显示</el-radio>
     </el-form-item>
-    <billboard v-if="form.type == 'billboard'"></billboard>
+    <billboard v-if="form.type == 'billboard'" :submitForm="submitForm" :billboard="billboard"></billboard>
     <el-form-item>
         <el-button type="primary" @click="onSubmit">立即创建</el-button>
         <el-button @click="resetForm">取消</el-button>
@@ -42,6 +42,7 @@
 <script>
 import type from "@/data/geometry_type.json";
 import billboard from "@/views/geometry/form/billboard";
+import geometry from "@/data/geometry_type.json";
 export default {
     data() {
         return {
@@ -58,7 +59,9 @@ export default {
                 show: true,
                 id: ""
             },
-            geometryType: type.geometryType
+            geometryType: type.geometryType,
+            submitForm: false,
+            billboard: geometry.billboard,
         };
     },
     methods: {
@@ -74,6 +77,7 @@ export default {
             });
         },
         onSubmit() {
+            this.submitForm = true;
             console.log(this.form);
         },
         resetForm() {
