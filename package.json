@@ -13,6 +13,7 @@
     "cesium-tdt": "^1.1.0",
     "core-js": "^3.6.5",
     "element-ui": "^2.13.2",
+    "libgif": "^0.0.3",
     "register-service-worker": "^1.7.1",
     "sass": "^1.26.10",
     "sass-loader": "^9.0.3",
