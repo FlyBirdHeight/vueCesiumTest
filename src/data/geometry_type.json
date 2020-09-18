@@ -56,7 +56,8 @@
             0,
             0.68
         ],
-        "color": "rgba(255, 69, 0, 0.68)"
+        "color": "rgba(255, 69, 0, 0.68)",
+        "image_type": "png"
     },
     "box": {},
     "ellipsoid": {},

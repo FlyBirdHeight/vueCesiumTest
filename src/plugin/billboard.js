@@ -1,5 +1,6 @@
 import store from '../store'
 var Cesium = require('cesium/Cesium');
+var SuperGif = require('libgif/libgif');
 var billboard = null;
 
 function createBillboard(position, viewer) {
@@ -10,9 +11,9 @@ function createBillboard(position, viewer) {
         clock: {
             "interval": "2020-09-01T12:00:00Z/2020-09-01T12:00:10Z",
             "currentTime": "2020-09-01T12:00:00Z",
-            "multiplier": 10
+            "multiplier": 10,
+            "range": "LOOP_STOP",
         },
-
     },
     {
         id: "navigation_point_first",
@@ -54,35 +55,64 @@ function getByNameBillboard(name, viewer) {
 };
 
 function createBillboardByCzml(data, viewer) {
-    var czml = [{
-        id: "document",
-        name: data.name+'czml',
-        version: "1.0",
-    },
-    {
-        id: data.id,
-        name: data.name,
-        description: data.description,
-        billboard: {
-            image: data.billboard.image,
-            scale: Number(data.billboard.scale),
-            verticalOrigin: data.billboard.verticalOrigin,
-            pixelOffset: {
-                cartesian2: [Number(data.billboard.pixelOffset.x), Number(data.billboard.pixelOffset.y)]
-            },
-            horizontalOrigin: data.billboard.horizontalOrigin
-        },
-        position: {
-            cartographicDegrees: [
-                Number(data.position.lon), Number(data.position.lat), Number(data.height),
-            ]
+    data = handleData(data);
+    if (data.billboard.image_type == 'image/gif') {
+        var div = document.createElement("div");
+        var img = document.createElement("img");
+        div.appendChild(img);
+        img.src = data.billboard.image;
+        img.onload = () => {
+            var rub = new SuperGif({
+                gif: img
+            });
+            rub.load(() => {
+                var entity = viewer.entities.add({
+                    position: Cesium.Cartesian3.fromDegrees(Number(data.position.lon), Number(data.position.lat),Number(data.height)),
+                    id: data.id,
+                    name: data.name,
+                    description: data.description,
+                    billboard: {
+                        image: new Cesium.CallbackProperty(() => {
+                            return rub.get_canvas().toDataURL("image/png");
+                        }, false),
+                        verticalOrigin: data.billboard.verticalOrigin,
+                        horizontalOrigin: data.billboard.horizontalOrigin,
+                        scale: data.billboard.scale,
+                        show: data.show
+                    }
+                });
+
+                viewer.trackedEntity = entity;
+            });
         }
-    }];
-    console.log(czml);
-    var createBillboard = new Cesium.CzmlDataSource(data.name);
-    viewer.dataSources.add(createBillboard.load(czml));
+    } else {
+        viewer.entities.add({
+            position: Cesium.Cartesian3.fromDegrees(Number(data.position.lon), Number(data.position.lat),Number(data.height)),
+            id: data.id,
+            name: data.name,
+            description: data.description,
+            billboard: {
+                image: data.billboard.image,
+                verticalOrigin: data.billboard.verticalOrigin,
+                horizontalOrigin: data.billboard.horizontalOrigin,
+                scale: data.billboard.scale,
+                show: data.show
+            }
+        });
+    }
 }
 
+function handleData(data) {
+    data.billboard.pixelOffset = new Cesium.Cartesian2(data.billboard.pixelOffset.x, data.billboard.pixelOffset.y);
+    data.billboard.verticalOrigin = data.billboard.verticalOrigin == 'BOTTOM' ? Cesium.VerticalOrigin.BOTTOM :
+        data.billboard.verticalOrigin == 'CENTER' ? Cesium.VerticalOrigin.CENTER :
+            data.billboard.verticalOrigin == 'BASELINE' ? Cesium.VerticalOrigin.BASELINE : Cesium.VerticalOrigin.TOP;
+    data.billboard.scale = Number(data.billboard.scale);
+    data.billboard.horizontalOrigin = data.billboard.horizontalOrigin == 'BOTTOM' ? Cesium.HorizontalOrigin.BOTTOM :
+        data.billboard.horizontalOrigin == 'CENTER' ? Cesium.HorizontalOrigin.CENTER : Cesium.HorizontalOrigin.TOP;
+
+    return data;
+}
 export default {
     install: function (Vue) {
         Vue.prototype.createBillboard = (position, viewer) => createBillboard(position, viewer)

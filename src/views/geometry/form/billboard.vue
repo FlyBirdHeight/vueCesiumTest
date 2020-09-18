@@ -73,6 +73,7 @@ export default {
   methods: {
     handleSuccess(res, file) {
       this.billboard.image = res.response
+      this.billboard.image_type = file.raw.type
     },
     handleData() {
       this.$emit('billboard', this.billboard)

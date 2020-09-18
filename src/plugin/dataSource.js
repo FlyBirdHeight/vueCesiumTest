@@ -38,10 +38,10 @@ function getAllDataSource(viewer){
 
 export default {
     install: function (Vue) {
-        Vue.prototype.getDataSourceByName = (name, viewer) => getDataSourceByName(name, viewer)
-        Vue.prototype.lowerDataSource = (name, viewer) => lowerDataSource(name, viewer)
-        Vue.prototype.removeDataSource = (name, viewer) => removeDataSource(name, viewer)
-        Vue.prototype.removeDataSourceAll = (viewer) => removeDataSourceAll(viewer)
-        Vue.prototype.getAllDataSource = (viewer) => getAllDataSource(viewer)
+        Vue.prototype.$getDataSourceByName = (name, viewer) => getDataSourceByName(name, viewer)
+        Vue.prototype.$lowerDataSource = (name, viewer) => lowerDataSource(name, viewer)
+        Vue.prototype.$removeDataSource = (name, viewer) => removeDataSource(name, viewer)
+        Vue.prototype.$removeDataSourceAll = (viewer) => removeDataSourceAll(viewer)
+        Vue.prototype.$getAllDataSource = (viewer) => getAllDataSource(viewer)
     }
 }

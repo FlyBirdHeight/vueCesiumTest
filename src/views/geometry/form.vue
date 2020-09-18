@@ -90,7 +90,7 @@ export default {
       })
     },
     onSubmit() {
-      let viewer = this.viewer;
+      let viewer = this.viewer
       this.form.position.lat = this.$store.state.geometryForm.lat
       this.form.position.lon = this.$store.state.geometryForm.lon
       switch (this.form.type) {
@@ -145,17 +145,16 @@ export default {
       }
     },
     createBillboardData(viewer) {
+      var Cesium = this.Cesium
       this.form.id = 'billboard:' + new Date().getTime()
       this.form.billboard = this.billboard
-      let color = this.form.billboard.color
-      color = color.substring(5, color.length - 1)
-      this.form.billboard.deal_color = color.split(',')
+      //   let color = this.form.billboard.color
+      //   color = color.substring(5, color.length - 1)
+      //   this.form.billboard.deal_color = color.split(',')
       this.createBillboardByCzml(this.form, viewer)
     },
   },
-  mounted() {
-      
-  },
+  mounted() {},
   components: {
     billboard,
   },
