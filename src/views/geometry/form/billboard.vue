@@ -13,9 +13,9 @@
         <i v-else class="el-icon-plus avatar-uploader-icon" style="line-height:3"></i>
       </el-upload>
     </el-form-item>
-    <el-form-item label="颜色选择">
+    <!-- <el-form-item label="颜色选择">
       <el-color-picker v-model="billboard.color" show-alpha :predefine="predefineColors"></el-color-picker>
-    </el-form-item>
+    </el-form-item> -->
     <el-form-item label="缩放比例">
       <el-input-number
         v-model="billboard.scale"
@@ -65,7 +65,7 @@ export default {
   },
   data() {
     return {
-      predefineColors: config.billboard.color,
+      predefineColors: config.color,
       horizontal: config.billboard.horizontalOrigin,
       vertical: config.billboard.verticalOrigin,
     }

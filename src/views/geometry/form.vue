@@ -16,7 +16,7 @@
     <el-form-item label="介绍">
       <el-input v-model="form.description" placeholder="介绍"></el-input>
     </el-form-item>
-    <el-form-item label="经纬度设置" class="clearBottom">
+    <el-form-item label="经纬度设置" class="clearBottom" v-if="form.type != 'polygon'">
       <el-row :gutter="20">
         <el-col :span="8">
           <el-input v-model="$store.state.geometryForm.lon" placeholder="经度"></el-input>
@@ -44,6 +44,7 @@
       <el-radio v-model="form.show" :label="false" border>不显示</el-radio>
     </el-form-item>
     <billboard v-if="form.type == 'billboard'" :submitForm="submitForm" :billboard="billboard"></billboard>
+    <polygon-create v-if="form.type == 'polygon'" :submitForm="submitForm" :polygon="polygon"></polygon-create>
     <el-form-item>
       <el-button type="primary" @click="onSubmit">立即创建</el-button>
       <el-button @click="resetForm">取消</el-button>
@@ -54,6 +55,7 @@
 <script>
 import type from '@/data/geometry_type.json'
 import billboard from '@/views/geometry/form/billboard'
+import polygonCreate from '@/views/geometry/form/polygon'
 import geometry from '@/data/geometry_type.json'
 export default {
   data() {
@@ -68,13 +70,13 @@ export default {
         height: '',
         name: '',
         description: '',
-        image: '',
         show: true,
         id: '',
       },
       geometryType: type.geometryType,
       submitForm: false,
       billboard: geometry.billboard,
+      polygon: geometry.polygon
     }
   },
   methods: {
@@ -104,6 +106,7 @@ export default {
         case 'point':
           break
         case 'polygon':
+          console.log('polygon');
           break
         case 'rectangle':
           break
@@ -128,6 +131,7 @@ export default {
         ),
       })
       this.$store.commit('SET_VIEWER', viewer)
+      this.resetForm();
     },
     resetForm() {
       this.form = {
@@ -139,7 +143,6 @@ export default {
         height: '',
         name: '',
         description: '',
-        image: '',
         show: true,
         id: '',
       }
@@ -154,9 +157,9 @@ export default {
       this.createBillboardByCzml(this.form, viewer)
     },
   },
-  mounted() {},
   components: {
     billboard,
+    polygonCreate
   },
 }
 </script>

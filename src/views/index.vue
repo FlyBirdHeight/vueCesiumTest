@@ -43,9 +43,10 @@ export default {
   methods: {
     clickForPosition(viewer) {
       var Cesium = this.Cesium
+      var handle = new Cesium.ScreenSpaceEventHandler(this.$store.state.viewer.viewer.scene.canvas)
       var store = this.$store
       let _this = this
-      this.handler.setInputAction(function(mouse) {
+      handle.setInputAction(function(mouse) {
         var picker = viewer.scene.pick(mouse.position)
         if (Cesium.defined(picker)) {
           if (_this.notifyObject != null) {
@@ -100,12 +101,6 @@ export default {
         destination: this.Cesium.Cartesian3.fromDegrees(103.84, 31.15, 7000000),
       })
       this.$store.commit('SET_VIEWER', viewer)
-    },
-  },
-  computed: {
-    handler() {
-      var Cesium = this.Cesium
-      return new Cesium.ScreenSpaceEventHandler(this.$store.state.viewer.viewer.scene.canvas)
     },
   },
 }

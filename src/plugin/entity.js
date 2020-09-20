@@ -13,28 +13,6 @@ function createPolyline(viewer, data) {
     })
 }
 
-function createPolygon(viewer, data) {
-    viewer.entities.add({
-        id: data.id,
-        name: data.name,
-        description: data.description,
-        polygon: {
-            show: data.show,
-            fill: data.polygon.fill,
-            material: data.polygon.material,
-            outline: data.polygon.outline,
-            outlineColor:  data.polygon.outlineColor,
-            outlineWidth: data.polygon.outlineWidth,
-            height: data.height,
-            extrudedHeight: data.polygon.extrudedHeight,
-            hierarchy: new Cesium.CallbackProperty(function() {
-                return data.polygon.hierarchy
-            }, false),
-            closeTop: data.polygon.closeTop
-        }   
-    })
-}
-
 function removeById(viewer, id) {
     let status = viewer.entities.removeById(id);
 
@@ -70,6 +48,5 @@ export default {
         Vue.prototype.$removeAll = (viewer) => removeAll(viewer)
         Vue.prototype.$getAll = (viewer) => getAll(viewer)
         Vue.prototype.$createPolyline = (viewer, data) => createPolyline(viewer, data)
-        Vue.prototype.$createPolygon = (viewer, data) => createPolygon(viewer, data)
     }
 }
