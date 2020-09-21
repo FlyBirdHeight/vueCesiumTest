@@ -11,7 +11,9 @@ function lookAt(position, heading, pitch, viewer) {
 }
 //不带动画直接到目标点
 function setView(viewer, position) {
-
+    viewer.camera.setView({
+        destination: this.Cesium.Cartesian3.fromDegrees(position.lon, position.lat, position.height),
+    })
 }
 //取消飞行
 function cancelFlight(viewer) {
@@ -30,5 +32,6 @@ function getMagnitude(viewer) {
 export default {
     install: function (Vue) {
         Vue.prototype.flyTo = (position, viewer) => flyTo(position, viewer)
+        Vue.prototype.setView = (viewer, position) => setView(viewer, position)
     }
 }

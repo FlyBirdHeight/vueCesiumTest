@@ -27,7 +27,14 @@ export default {
     })
     var viewer = viewerCreate.initViewer()
     this.$imageryLayersInit(viewer)
-    this.seeChina(viewer)
+    this.setView({
+      viewer: viewer,
+      position: {
+        lon: 103.84,
+        lat: 31.15,
+        height: 70000,
+      },
+    })
     this.clickForPosition(viewer)
     this.$store.commit('SET_VIEWER', viewer)
   },
@@ -40,14 +47,8 @@ export default {
         store: _this.$store,
         notify: _this.$notify,
       })
-      this.handleEvent.setHandle();
+      this.handleEvent.setHandle()
       this.handleEvent.clickForPositionAndDescription()
-      this.$store.commit("SET_VIEWER",viewer);
-    },
-    seeChina(viewer) {
-      viewer.camera.setView({
-        destination: this.Cesium.Cartesian3.fromDegrees(103.84, 31.15, 7000000),
-      })
       this.$store.commit('SET_VIEWER', viewer)
     },
     dynamicDrawGeometry() {
@@ -55,21 +56,21 @@ export default {
       let type = this.$store.state.viewer.draw_type
       let style = this.$store.state.viewer.draw_style.data
       let viewer = this.$store.state.viewer.viewer
-      let _this = this;
+      let _this = this
       switch (type) {
         case 'polygon':
           let draw = new DrawPolygon({
             viewer: viewer,
             data: style,
-            callback: function(evt){
-              let entity = evt;
-              draw.destroy();
-              _this.clickForPosition(viewer);
-              draw.reset();
-              viewer.entities.add(entity);
-            }
+            callback: function(evt) {
+              let entity = evt
+              draw.destroy()
+              _this.clickForPosition(viewer)
+              draw.reset()
+              viewer.entities.add(entity)
+            },
           })
-          draw.dynamicDraw();
+          draw.dynamicDraw()
           break
         case 'polyline':
           break
