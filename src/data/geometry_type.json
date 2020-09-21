@@ -64,11 +64,13 @@
     "label": {},
     "polygon": {
         "outline":false,
-        "outlineColor": "rgb(0,0,0)",
+        "outlineColor": [],
+        "outlineColor_deal":"rgb(0,0,0)",
         "outlineWidth": 1,
         "width": 10,
         "closeTop": true,
-        "material": "rgba(255, 69, 0, 0.68)",
+        "material": "",
+        "material_color": "rgba(255, 69, 0, 0.68)",
         "fill":true,
         "extrudedHeight": 0.0
     },

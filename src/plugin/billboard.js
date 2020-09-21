@@ -67,7 +67,7 @@ function createBillboardByCzml(data, viewer) {
             });
             rub.load(() => {
                 var entity = viewer.entities.add({
-                    position: Cesium.Cartesian3.fromDegrees(Number(data.position.lon), Number(data.position.lat),Number(data.height)),
+                    position: Cesium.Cartesian3.fromDegrees(Number(data.position.lon), Number(data.position.lat), Number(data.height)),
                     id: data.id,
                     name: data.name,
                     description: data.description,
@@ -87,7 +87,7 @@ function createBillboardByCzml(data, viewer) {
         }
     } else {
         viewer.entities.add({
-            position: Cesium.Cartesian3.fromDegrees(Number(data.position.lon), Number(data.position.lat),Number(data.height)),
+            position: Cesium.Cartesian3.fromDegrees(Number(data.position.lon), Number(data.position.lat), Number(data.height)),
             id: data.id,
             name: data.name,
             description: data.description,

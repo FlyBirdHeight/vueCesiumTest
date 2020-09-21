@@ -7,56 +7,89 @@
 <script>
 import token from '@/config/token.js'
 import EventHandle from '@/plugin/eventHandle/index.js'
+import ViewerCreate from '@/plugin/viewer/index.js'
+import DrawPolygon from '@/plugin/entity/polygon.js'
 export default {
   name: 'cesiumPage',
   data() {
     return {
       notifyObject: null,
+      handleEvent: null,
     }
   },
   mounted() {
+    let _this = this
     var TDU_Key = token
-    var Cesium = this.Cesium
     var cesiumContainer = document.getElementById('cesiumContainer')
-    var viewer = new Cesium.Viewer('cesiumContainer', {
-      infoBox: false,
-      geocoder: false, //控制右上角第一个位置的查找工具
-      homeButton: false, //控制右上角第二个位置的home图标
-      sceneModePicker: false, //控制右上角第三个位置的选择视角模式，2d，3d
-      baseLayerPicker: false, //控制右上角第四个位置的图层选择器
-      navigationHelpButton: false, //控制右上角第五个位置的导航帮助按钮
-      animation: true, //控制左下角的动画器件
-      timeline: true, //控制下方时间线
-      fullscreenButton: false, //右下角全屏按钮
-      shouldAnimate: true,
-      selectionIndicator: false,
-      terrainProvider: Cesium.createWorldTerrain(),
+    var viewerCreate = new ViewerCreate({
+      Cesium: _this.Cesium,
+      cesiumContainer: cesiumContainer,
     })
-    viewer.timeline.container.style.display = 'none'
-    viewer.animation.container.style.display = 'none'
-    viewer._cesiumWidget._creditContainer.style.display = 'none'
+    var viewer = viewerCreate.initViewer()
     this.$imageryLayersInit(viewer)
     this.seeChina(viewer)
     this.clickForPosition(viewer)
-    viewer.scene.debugShowFramesPerSecond = true
     this.$store.commit('SET_VIEWER', viewer)
   },
   methods: {
     clickForPosition(viewer) {
-      let _this = this;
-      var handleEvent = new EventHandle({
+      let _this = this
+      this.handleEvent = new EventHandle({
         viewer: viewer,
         notification: _this.notifyObject,
         store: _this.$store,
-        notify: _this.$notify
-      });
-      handleEvent.clickForPositionAndDescription()
+        notify: _this.$notify,
+      })
+      this.handleEvent.setHandle();
+      this.handleEvent.clickForPositionAndDescription()
+      this.$store.commit("SET_VIEWER",viewer);
     },
     seeChina(viewer) {
       viewer.camera.setView({
         destination: this.Cesium.Cartesian3.fromDegrees(103.84, 31.15, 7000000),
       })
       this.$store.commit('SET_VIEWER', viewer)
+    },
+    dynamicDrawGeometry() {
+      this.handleEvent.destoryHandle()
+      let type = this.$store.state.viewer.draw_type
+      let style = this.$store.state.viewer.draw_style.data
+      let viewer = this.$store.state.viewer.viewer
+      let _this = this;
+      switch (type) {
+        case 'polygon':
+          let draw = new DrawPolygon({
+            viewer: viewer,
+            data: style,
+            callback: function(evt){
+              let entity = evt;
+              draw.destroy();
+              _this.clickForPosition(viewer);
+              draw.reset();
+              viewer.entities.add(entity);
+            }
+          })
+          draw.dynamicDraw();
+          break
+        case 'polyline':
+          break
+        case 'point':
+          break
+        default:
+          break
+      }
+    },
+  },
+  computed: {
+    dynamicDraw() {
+      return this.$store.state.viewer.dynamic
+    },
+  },
+  watch: {
+    dynamicDraw(newV, oldV) {
+      if (newV) {
+        this.dynamicDrawGeometry()
+      }
     },
   },
 }
@@ -80,7 +113,7 @@ body,
 }
 </style>
 <style>
-.el-notification{
-    background-color: rgba(255,255,255,0.8)
+.el-notification {
+  background-color: rgba(255, 255, 255, 0.8);
 }
 </style>

@@ -1,4 +1,4 @@
-import token from "../config/token.js";
+import token from "../../config/token.js";
 var Cesium = require('cesium/Cesium');
 var TDU_Key = token;
 

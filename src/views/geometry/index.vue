@@ -70,8 +70,8 @@ export default {
     handleClick(row) {},
   },
   mounted() {
-      console.log(this.viewer.entities.value);
-      console.log(this.viewer.dataSources._dataSources);
+      // console.log(this.viewer.entities.value);
+      // console.log(this.viewer.dataSources._dataSources);
   },
 }
 </script>

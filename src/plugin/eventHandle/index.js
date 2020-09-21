@@ -5,11 +5,23 @@ class EventHandle {
         this.notification = arg.notification;
         this.store = arg.store;
         this.notify = arg.notify;
+        this.handle = null;
     }
 
+    /**
+     * 设置事件处理对象
+     */
+    setHandle() {
+        var Cesium = this.Cesium;
+        this.handle = new Cesium.ScreenSpaceEventHandler(this.store.state.viewer.viewer.scene.canvas);
+    }
+
+    /**
+     * 点击获取坐标与实例介绍
+     */
     clickForPositionAndDescription() {
         var Cesium = this.Cesium;
-        var handle = new Cesium.ScreenSpaceEventHandler(this.store.state.viewer.viewer.scene.canvas);
+        var handle = this.handle;
         var store = this.store;
         let notifyObject = this.notification;
         var viewer = this.viewer;
@@ -20,6 +32,7 @@ class EventHandle {
                 if (notifyObject != null) {
                     notifyObject.close()
                 }
+                console.log(picker);
                 notifyObject = notify({
                     title: '拾取对象信息',
                     dangerouslyUseHTMLString: true,
@@ -63,6 +76,16 @@ class EventHandle {
                 }
             }
         }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
+    }
+
+    /**
+     * 去除事件监听对象
+     */
+    destoryHandle() {
+        if (this.handle) {
+            this.handle.destroy();
+            this.handle = null;
+        }
     }
 }
 

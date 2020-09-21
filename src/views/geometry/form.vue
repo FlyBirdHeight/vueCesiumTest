@@ -44,7 +44,7 @@
       <el-radio v-model="form.show" :label="false" border>不显示</el-radio>
     </el-form-item>
     <billboard v-if="form.type == 'billboard'" :submitForm="submitForm" :billboard="billboard"></billboard>
-    <polygon-create v-if="form.type == 'polygon'" :submitForm="submitForm" :polygon="polygon"></polygon-create>
+    <polygon-create v-if="form.type == 'polygon'" :submitForm="submitForm" :polygon="polygon" :form="form"></polygon-create>
     <el-form-item>
       <el-button type="primary" @click="onSubmit">立即创建</el-button>
       <el-button @click="resetForm">取消</el-button>
@@ -76,7 +76,8 @@ export default {
       geometryType: type.geometryType,
       submitForm: false,
       billboard: geometry.billboard,
-      polygon: geometry.polygon
+      polygon: geometry.polygon,
+      point: {}
     }
   },
   methods: {
@@ -106,7 +107,7 @@ export default {
         case 'point':
           break
         case 'polygon':
-          console.log('polygon');
+          console.log('polygon')
           break
         case 'rectangle':
           break
@@ -131,7 +132,7 @@ export default {
         ),
       })
       this.$store.commit('SET_VIEWER', viewer)
-      this.resetForm();
+      this.resetForm()
     },
     resetForm() {
       this.form = {
@@ -151,15 +152,17 @@ export default {
       var Cesium = this.Cesium
       this.form.id = 'billboard:' + new Date().getTime()
       this.form.billboard = this.billboard
-      //   let color = this.form.billboard.color
-      //   color = color.substring(5, color.length - 1)
-      //   this.form.billboard.deal_color = color.split(',')
       this.createBillboardByCzml(this.form, viewer)
+    },
+    createPolygon() {
+      let color = this.form.polygon.material_color
+      color = color.substring(5, color.length - 1)
+      this.form.polygon.material = color.split(',')
     },
   },
   components: {
     billboard,
-    polygonCreate
+    polygonCreate,
   },
 }
 </script>
