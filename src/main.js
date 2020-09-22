@@ -22,6 +22,8 @@ Vue.use(entity);
 Vue.use(imageryLayer);
 
 
+// import CesiumNavigation from 'cesium-navigation-es6'
+// Vue.prototype.CesiumNavigation = CesiumNavigation
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
@@ -31,6 +33,7 @@ var Cesium = require('cesium/Cesium');
 var widgets = require('cesium/Widgets/widgets.css');
 Vue.prototype.Cesium = Cesium
 Vue.prototype.widgets = widgets
+
 
 import axios from 'axios'
 Vue.prototype.axios = axios
