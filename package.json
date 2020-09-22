@@ -10,7 +10,8 @@
   "dependencies": {
     "@types/cesium": "^1.67.12",
     "axios": "^0.20.0",
-    "cesium": "^1.72.0",
+    "cesium": "^1.69.0",
+    "cesium-navigation-es6": "^1.1.6",
     "cesium-tdt": "^1.1.0",
     "core-js": "^3.6.5",
     "element-ui": "^2.13.2",

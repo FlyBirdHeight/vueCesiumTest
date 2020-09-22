@@ -9,6 +9,7 @@ import token from '@/config/token.js'
 import EventHandle from '@/plugin/eventHandle/index.js'
 import ViewerCreate from '@/plugin/viewer/index.js'
 import DrawPolygon from '@/plugin/entity/polygon.js'
+import CesiumNavigation from 'cesium-navigation-es6'
 export default {
   name: 'cesiumPage',
   data() {
@@ -27,18 +28,22 @@ export default {
     })
     var viewer = viewerCreate.initViewer()
     this.$imageryLayersInit(viewer)
-    this.setView({
+    this.$viewPosition({
       viewer: viewer,
       position: {
         lon: 103.84,
         lat: 31.15,
-        height: 70000,
+        height: 7000000.0,
       },
     })
-    this.clickForPosition(viewer)
+    // this.initNavigation(viewer)
     this.$store.commit('SET_VIEWER', viewer)
+    this.clickForPosition(viewer)
   },
   methods: {
+    /**
+     * 坐标获取及介绍获取
+     */
     clickForPosition(viewer) {
       let _this = this
       this.handleEvent = new EventHandle({
@@ -51,6 +56,9 @@ export default {
       this.handleEvent.clickForPositionAndDescription()
       this.$store.commit('SET_VIEWER', viewer)
     },
+    /**
+     * 动态绘制
+     */
     dynamicDrawGeometry() {
       this.handleEvent.destoryHandle()
       let type = this.$store.state.viewer.draw_type
@@ -68,6 +76,7 @@ export default {
               _this.clickForPosition(viewer)
               draw.reset()
               viewer.entities.add(entity)
+              _this.$store.commit('SET_VIEWER', viewer)
             },
           })
           draw.dynamicDraw()
@@ -79,6 +88,23 @@ export default {
         default:
           break
       }
+    },
+    /**
+     * 初始化右上角罗盘
+     */
+    initNavigation(viewer) {
+      var options = {}
+      // 用于在使用重置导航重置地图视图时设置默认视图控制。接受的值是Cesium.Cartographic 和 Cesium.Rectangle.
+      options.defaultResetView = Rectangle.fromDegrees(80, 22, 130, 50)
+      // 用于启用或禁用罗盘。true是启用罗盘，false是禁用罗盘。默认值为true。如果将选项设置为false，则罗盘将不会添加到地图中。
+      options.enableCompass = true
+      // 用于启用或禁用缩放控件。true是启用，false是禁用。默认值为true。如果将选项设置为false，则缩放控件将不会添加到地图中。
+      options.enableZoomControls = true
+      // 用于启用或禁用距离图例。true是启用，false是禁用。默认值为true。如果将选项设置为false，距离图例将不会添加到地图中。
+      options.enableDistanceLegend = true
+      // 用于启用或禁用指南针外环。true是启用，false是禁用。默认值为true。如果将选项设置为false，则该环将可见但无效。
+      options.enableCompassOuterRing = true
+      CesiumNavigation(viewer, options)
     },
   },
   computed: {

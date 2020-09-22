@@ -9,10 +9,13 @@ function flyTo(position, viewer) {
 function lookAt(position, heading, pitch, viewer) {
     viewer.camera.lookAtTransform(Matrix4.IDENTITY);
 }
-//不带动画直接到目标点
-function setView(viewer, position) {
-    viewer.camera.setView({
-        destination: this.Cesium.Cartesian3.fromDegrees(position.lon, position.lat, position.height),
+/**
+ * 不带动画直接到目标点
+ * @param {Obejct} arg 
+ */
+function viewPosition(arg) {
+    arg.viewer.camera.setView({
+        destination: Cesium.Cartesian3.fromDegrees(arg.position.lon, arg.position.lat, Number(arg.position.height)),
     })
 }
 //取消飞行
@@ -32,6 +35,6 @@ function getMagnitude(viewer) {
 export default {
     install: function (Vue) {
         Vue.prototype.flyTo = (position, viewer) => flyTo(position, viewer)
-        Vue.prototype.setView = (viewer, position) => setView(viewer, position)
+        Vue.prototype.$viewPosition = (viewer, position) => viewPosition(viewer, position)
     }
 }

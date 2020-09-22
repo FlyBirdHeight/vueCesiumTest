@@ -76,6 +76,7 @@ class EventHandle {
                 }
             }
         }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
+        this.store.commit('SET_VIEWER', viewer)
     }
 
     /**
