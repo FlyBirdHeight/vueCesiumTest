@@ -4,7 +4,7 @@
 class DrawCircle {
     constructor(arg) {
         this.viewer = arg.viewer;
-        this.Cesium = arg.Cesium;
+        this.Cesium = require('cesium/Cesium');
         this.callback = arg.callback;
         this._cicle = null; //活动圆
         this.floatingPoint = null;

@@ -16,21 +16,24 @@
         "#c7158577"
     ],
     "billboard": {
-        "verticalOrigin": [{
-            "value": "CENTER",
-            "label": "中央"
-        },
-        {
-            "value": "TOP",
-            "label": "上部"
-        },
-        {
-            "value": "BOTTOM",
-            "label": "底部"
-        },{
-            "value": "BASELINE",
-            "label": "基线"
-        }],
+        "verticalOrigin": [
+            {
+                "value": "CENTER",
+                "label": "中央"
+            },
+            {
+                "value": "TOP",
+                "label": "上部"
+            },
+            {
+                "value": "BOTTOM",
+                "label": "底部"
+            },
+            {
+                "value": "BASELINE",
+                "label": "基线"
+            }
+        ],
         "horizontalOrigin": [
             {
                 "value": "CENTER",
@@ -53,5 +56,48 @@
     "rectangle": {},
     "wall": {},
     "cylinder": {},
-    "corridor": {}
+    "corridor": {},
+    "polyline": {
+        "arcTypeSelect": [
+            {
+                "value": "NONE",
+                "label": "不符合地球弧度"
+            },
+            {
+                "value": "GEODESIC",
+                "label": "遵循地球路径"
+            },
+            {
+                "value": "RHUMB",
+                "label": "恒向线(延伸方向都是恒定)"
+            }
+        ],
+        "classificationTypeSelect": [
+            {
+                "value": "TERRAIN",
+                "label": "只针对地形"
+            },
+            {
+                "value": "CESIUM_3D_TILE",
+                "label": "只针对3dtiles对象"
+            },
+            {
+                "value": "BOTH",
+                "label": "两者皆可"
+            }
+        ],
+        "shadowsSelect":[{
+            "value": "DISABLED",
+            "label": "不接收阴影与投射阴影"
+        },{
+            "value": "ENABLED",
+            "label": "接收阴影与投射阴影"
+        },{
+            "value": "CAST_ONLY",
+            "label": "接收投射阴影"
+        },{
+            "value": "RECEIVE_ONLY",
+            "label": "接收阴影"
+        }]
+    }
 }

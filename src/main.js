@@ -21,17 +21,13 @@ Vue.use(gifLoad);
 Vue.use(entity);
 Vue.use(imageryLayer);
 
-
-// import CesiumNavigation from 'cesium-navigation-es6'
-// Vue.prototype.CesiumNavigation = CesiumNavigation
-
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 
-var Cesium = require('cesium/Cesium');
-var widgets = require('cesium/Widgets/widgets.css');
+import * as Cesium from 'cesium/Cesium'
 Vue.prototype.Cesium = Cesium
+var widgets = require('cesium/Widgets/widgets.css');
 Vue.prototype.widgets = widgets
 
 

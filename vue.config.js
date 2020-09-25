@@ -61,7 +61,7 @@ module.exports = {
         to: 'ThirdParty/Workers'
       }]),
       new webpack.DefinePlugin({
-        CESIUM_BASE_URL: JSON.stringify('./')
+        CESIUM_BASE_URL: JSON.stringify('')
       })
     ],
     module: {

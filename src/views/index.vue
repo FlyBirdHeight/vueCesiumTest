@@ -9,8 +9,9 @@ import token from '@/config/token.js'
 import EventHandle from '@/plugin/eventHandle/index.js'
 import ViewerCreate from '@/plugin/viewer/index.js'
 import DrawPolygon from '@/plugin/entity/polygon.js'
-import * as Cesium from 'cesium/Cesium'
-import CesiumNavigation from 'cesium-navigation-es6'
+import DrawPolyline from '@/plugin/entity/polyline.js'
+// import * as Cesium from 'cesium/Cesium'
+import CesiumNavigation from 'adsionli-navigation'
 export default {
   name: 'cesiumPage',
   data() {
@@ -37,7 +38,7 @@ export default {
         height: 7000000.0,
       },
     })
-    // this.initNavigation(viewer)
+    this.initNavigation(viewer)
     this.$store.commit('SET_VIEWER', viewer)
     this.clickForPosition(viewer)
   },
@@ -68,21 +69,34 @@ export default {
       let _this = this
       switch (type) {
         case 'polygon':
-          let draw = new DrawPolygon({
+          let drawPolygon = new DrawPolygon({
             viewer: viewer,
             data: style,
             callback: function(evt) {
               let entity = evt
-              draw.destroy()
+              drawPolygon.destroy()
               _this.clickForPosition(viewer)
-              draw.reset()
+              drawPolygon.reset()
               viewer.entities.add(entity)
               _this.$store.commit('SET_VIEWER', viewer)
             },
           })
-          draw.dynamicDraw()
+          drawPolygon.dynamicDraw()
           break
         case 'polyline':
+          let drawPolyline = new DrawPolygon({
+            viewer: viewer,
+            data: style,
+            callback: function(evt) {
+              let entity = evt
+              drawPolyline.destroy()
+              _this.clickForPosition(viewer)
+              drawPolyline.reset()
+              viewer.entities.add(entity)
+              _this.$store.commit('SET_VIEWER', viewer)
+            },
+          })
+          drawPolyline.dynamicDraw()
           break
         case 'point':
           break
@@ -96,7 +110,7 @@ export default {
     initNavigation(viewer) {
       var options = {}
       // 用于在使用重置导航重置地图视图时设置默认视图控制。接受的值是Cesium.Cartographic 和 Cesium.Rectangle.
-      options.defaultResetView = this.Cesium.Rectangle.fromDegrees(80, 22, 130, 50)
+      options.defaultResetView = this.Cesium.Cartographic.fromDegrees(103.84, 31.15, 7000000)
       // 用于启用或禁用罗盘。true是启用罗盘，false是禁用罗盘。默认值为true。如果将选项设置为false，则罗盘将不会添加到地图中。
       options.enableCompass = true
       // 用于启用或禁用缩放控件。true是启用，false是禁用。默认值为true。如果将选项设置为false，则缩放控件将不会添加到地图中。

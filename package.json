@@ -10,8 +10,7 @@
   "dependencies": {
     "axios": "^0.20.0",
     "cesium": "^1.73.0",
-    "cesium-navigation-es6": "1.1.7",
-    "cesium-tdt": "^1.1.0",
+    "adsionli-navigation": "^1.0.0",
     "core-js": "^3.6.5",
     "element-ui": "^2.13.2",
     "libgif": "^0.0.3",

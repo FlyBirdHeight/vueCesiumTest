@@ -16,7 +16,7 @@
     <el-form-item label="介绍">
       <el-input v-model="form.description" placeholder="介绍"></el-input>
     </el-form-item>
-    <el-form-item label="经纬度设置" class="clearBottom" v-if="form.type != 'polygon'">
+    <el-form-item label="经纬度设置" class="clearBottom" v-if="form.type != 'polygon' && form.type != 'polyline'">
       <el-row :gutter="20">
         <el-col :span="8">
           <el-input v-model="$store.state.geometryForm.lon" placeholder="经度"></el-input>
@@ -45,6 +45,7 @@
     </el-form-item>
     <billboard v-if="form.type == 'billboard'" :submitForm="submitForm" :billboard="billboard"></billboard>
     <polygon-create v-if="form.type == 'polygon'" :submitForm="submitForm" :polygon="polygon" :form="form"></polygon-create>
+    <polyline-create v-if="form.type == 'polyline'" :submitForm="submitForm" :polyline="polyline" :form="form"></polyline-create>
     <el-form-item>
       <el-button type="primary" @click="onSubmit">立即创建</el-button>
       <el-button @click="resetForm">取消</el-button>
@@ -57,6 +58,7 @@ import type from '@/data/geometry_type.json'
 import billboard from '@/views/geometry/form/billboard'
 import polygonCreate from '@/views/geometry/form/polygon'
 import geometry from '@/data/geometry_type.json'
+import polylineCreate from '@/views/geometry/form/polyline'
 export default {
   data() {
     return {
@@ -77,7 +79,8 @@ export default {
       submitForm: false,
       billboard: geometry.billboard,
       polygon: geometry.polygon,
-      point: {}
+      point: {},
+      polyline: geometry.polyline
     }
   },
   methods: {
@@ -163,6 +166,7 @@ export default {
   components: {
     billboard,
     polygonCreate,
+    polylineCreate
   },
 }
 </script>

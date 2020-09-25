@@ -166,6 +166,13 @@ class DrawPolyline {
         cartesian = this.viewer.scene.globe.pick(ray, this.viewer.scene);
         return cartesian;
     }
+
+    /**
+     * 处理数据
+     */
+    handleData(){
+        
+    }
 }
 
 export default DrawPolyline

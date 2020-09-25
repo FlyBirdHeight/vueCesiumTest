@@ -5,14 +5,6 @@
             "label": "电子板"
         },
         {
-            "value": "ellipsoid",
-            "label": "椭球体(可设置圆球体)"
-        },
-        {
-            "value": "label",
-            "label": "文字"
-        },
-        {
             "value": "point",
             "label": "点"
         },
@@ -21,16 +13,28 @@
             "label": "多边形"
         },
         {
+            "value": "polyline",
+            "label": "折线段"
+        },
+        {
             "value": "rectangle",
             "label": "矩形(可设置长方体)"
         },
         {
-            "value": "wall",
-            "label": "墙体"
+            "value": "circle",
+            "label": "圆形(圆柱体)"
         },
         {
-            "value": "cylinder",
-            "label": "圆柱体"
+            "value": "ellipsoid",
+            "label": "椭球体(可设置圆球体)"
+        },
+        {
+            "value": "label",
+            "label": "文字"
+        },
+        {
+            "value": "wall",
+            "label": "墙体"
         },
         {
             "value": "corridor",
@@ -63,19 +67,35 @@
     "ellipsoid": {},
     "label": {},
     "polygon": {
-        "outline":false,
+        "outline": false,
         "outlineColor": [],
-        "outlineColor_deal":"rgb(0,0,0)",
+        "outlineColor_deal": "rgb(0,0,0)",
         "outlineWidth": 1,
         "width": 10,
         "closeTop": true,
         "material": "",
         "material_color": "rgba(255, 69, 0, 0.68)",
-        "fill":true,
+        "fill": true,
         "extrudedHeight": 0.0
     },
     "rectangle": {},
     "wall": {},
     "cylinder": {},
-    "corridor": {}
+    "corridor": {},
+    "polyline": {
+        "dash": false,
+        "material": "",
+        "material_color": "rgba(255, 69, 0, 0.68)",
+        "outline": false,
+        "arctype": "NONE",
+        "clampToGround": false,
+        "classificationType": "BOTH",
+        "width": 10,
+        "shadows": "DISABLED",
+        "zIndex": 3,
+        "outlineColor": "rgb(0, 0, 0)",
+        "outlineWidth": 1,
+        "dashLength": 8.0,
+        "gapColor": "rgb(255, 255, 255)"
+    }
 }
