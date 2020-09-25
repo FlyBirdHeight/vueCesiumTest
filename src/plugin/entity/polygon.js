@@ -184,7 +184,10 @@ class DrawPolygon {
         this._positions = []; //活动点
         this._entities_point = [];  //脏数据
         this._entities_polygon = [];  //脏数据
+        this.viewer.entities.add(this._polygonLast)
         this._polygonData = null; //用户构造面
+
+        return this.viewer;
     }
 
     /**
