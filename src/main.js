@@ -3,6 +3,7 @@ import App from "./App.vue";
 import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
+import 'default-passive-events'
 // require('./plugin.js');
 
 import billboard from './plugin/billboard'

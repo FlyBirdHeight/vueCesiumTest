@@ -1,6 +1,7 @@
 /** 
  * 绘制折线 
  */
+import Handle from '../handle/handle.js'
 class DrawPolyline {
     constructor(arg) {
         this.viewer = arg.viewer;
@@ -13,6 +14,8 @@ class DrawPolyline {
         this._entities_point = []; //脏数据
         this._entities_line = []; //脏数据
         this._polylineData = null; //用于构造线数据
+        this.handle = new Handle();
+        this.handleDistance = []; //处理距离的数组
     }
 
     /**
@@ -65,6 +68,14 @@ class DrawPolyline {
                 $this._positions.push(cartesian.clone());
             }
             $this._positions.push(cartesian);
+            $this.handleDistance.push(cartesian);
+            if ($this.handleDistance.length >= 2) {
+                var returnDatra = $this.handle.distance($this.handleDistance[$this.handleDistance.length - 2], $this.handleDistance[$this.handleDistance.length - 1])
+                $this.handle.addLabel($this.viewer, {
+                    position: returnDatra.center,
+                    text: returnDatra.length
+                })
+            }
             $this.createPoint(cartesian); // 绘制点
         }, $this.Cesium.ScreenSpaceEventType.LEFT_CLICK);
         this.handler.setInputAction(function (evt) { //移动时绘制线
