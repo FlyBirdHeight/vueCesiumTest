@@ -37,7 +37,7 @@ class DrawPolyline {
             description: $this.data.description,
             name: $this.data.name,
             polyline: {
-                positions:data,
+                positions: data,
                 show: $this.data.show,
                 material: $this.data.polyline.material,
                 width: $this.data.polyline.width,
@@ -58,7 +58,6 @@ class DrawPolyline {
         var $this = this;
         this.handleData();
         this.handler = new this.Cesium.ScreenSpaceEventHandler(this.viewer.scene.canvas);
-        console.log(this.data)
         this.handler.setInputAction(function (evt) { //单机开始绘制
             //屏幕坐标转地形上坐标
             var cartesian = $this.getCatesian3FromPX(evt.position);
@@ -66,7 +65,7 @@ class DrawPolyline {
                 $this._positions.push(cartesian.clone());
             }
             $this._positions.push(cartesian);
-            $this.createPoint(cartesian);// 绘制点
+            $this.createPoint(cartesian); // 绘制点
         }, $this.Cesium.ScreenSpaceEventType.LEFT_CLICK);
         this.handler.setInputAction(function (evt) { //移动时绘制线
             if ($this._positions.length < 1) return;
@@ -84,7 +83,7 @@ class DrawPolyline {
             var cartesian = $this.getCatesian3FromPX(evt.position);
             $this._positions.pop();
             $this._positions.push(cartesian);
-            $this.createPoint(cartesian);// 绘制点
+            $this.createPoint(cartesian); // 绘制点
             $this._polylineData = $this._positions.concat();
             $this.viewer.entities.remove($this._polyline); //移除
             $this._polyline = null;
@@ -191,39 +190,41 @@ class DrawPolyline {
     handleData() {
         let $this = this;
         let data = this.data.polyline;
+        let Cesium = this.Cesium;
         //设置折线颜色
         let color = data.material_color
         color = color.substring(5, color.length - 1)
         color = color.split(',')
-        color = new this.Cesium.Color(Number(color[0]) / 255, Number(color[1]) / 255, Number(color[2]) / 255, Number(color[3]))
-        data.material = color;
+        color = new Cesium.Color(Number(color[0]) / 255, Number(color[1]) / 255, Number(color[2]) / 255, Number(color[3]))
         //折线间隔颜色
         let gapColor = data.gapColor
         gapColor = gapColor.substring(4, gapColor.length - 1)
         gapColor = gapColor.split(',')
-        gapColor = new this.Cesium.Color(Number(gapColor[0]) / 255, Number(gapColor[1]) / 255, Number(gapColor[2]) / 255)
+        gapColor = new Cesium.Color(Number(gapColor[0]) / 255, Number(gapColor[1]) / 255, Number(gapColor[2]) / 255)
         //折线外框颜色
         let outlineColor = data.outlineColor
         outlineColor = outlineColor.substring(4, outlineColor.length - 1)
         outlineColor = outlineColor.split(',')
-        outlineColor = new this.Cesium.Color(Number(outlineColor[0]) / 255, Number(outlineColor[1]) / 255, Number(outlineColor[2]) / 255)
+        outlineColor = new Cesium.Color(Number(outlineColor[0]) / 255, Number(outlineColor[1]) / 255, Number(outlineColor[2]) / 255)
         if (this.data.polyline.dash) {
-            data.material = new this.Cesium.PolylineDashMateialProperty({
+            data.material = new Cesium.PolylineDashMaterialProperty({
                 color: color,
                 gapColor: gapColor,
                 dashLength: $this.data.polyline.dashLength
             })
         } else if (this.data.polyline.outline) {
-            data.material = new this.Cesium.PolylineOutlineMaterialProperty({
+            data.material = new Cesium.PolylineOutlineMaterialProperty({
                 color: color,
                 outlineWidth: Number(outlineWidth),
                 outlineColor: outlineColor
             });
+        } else {
+            data.material = color;
         }
-        data.arcType = data.arcType == 'NONE' ? this.Cesium.ArcType.NONE : data.arcType == 'RHUMB' ? this.Cesium.ArcType.RHUMB : this.Cesium.ArcType.GEODESIC;
+        data.arcType = data.arcType == 'NONE' ? Cesium.ArcType.NONE : data.arcType == 'RHUMB' ? Cesium.ArcType.RHUMB : Cesium.ArcType.GEODESIC;
 
-        data.shadows = data.shadows == 'DISABLED' ? this.Cesium.ShadowMode.DISABLED : data.shadows == 'ENABLED' ? this.Cesium.ShadowMode.ENABLED : data.shadows == 'CAST_ONLY' ? this.Cesium.ShadowMode.CAST_ONLY : this.Cesium.ShadowMode.RECEIVE_ONLY
-        data.classificationType = data.classificationType == 'TERRAIN' ? this.Cesium.ClassificationType.TERRAIN : data.classificationType == 'CESIUM_3D_TILE' ? this.Cesium.ClassificationType.CESIUM_3D_TILE : this.Cesium.ClassificationType.BOTH;
+        data.shadows = data.shadows == 'DISABLED' ? Cesium.ShadowMode.DISABLED : data.shadows == 'ENABLED' ? Cesium.ShadowMode.ENABLED : data.shadows == 'CAST_ONLY' ? Cesium.ShadowMode.CAST_ONLY : Cesium.ShadowMode.RECEIVE_ONLY
+        data.classificationType = data.classificationType == 'TERRAIN' ? Cesium.ClassificationType.TERRAIN : data.classificationType == 'CESIUM_3D_TILE' ? Cesium.ClassificationType.CESIUM_3D_TILE : Cesium.ClassificationType.BOTH;
 
         this.data.polyline = data;
     }

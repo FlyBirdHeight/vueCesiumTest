@@ -90,7 +90,7 @@
         "arctype": "NONE",
         "clampToGround": false,
         "classificationType": "BOTH",
-        "width": 10,
+        "width": 2,
         "shadows": "DISABLED",
         "zIndex": 3,
         "outlineColor": "rgb(0, 0, 0)",
