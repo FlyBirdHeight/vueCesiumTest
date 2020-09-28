@@ -9,13 +9,18 @@
 | 2020/08/26 | 完成poi搜索，同时导入天地图地图  | adsionli |
 | 2020/08/27 | 完成几何体绘画，同时学习使用czml  | adsionli |
 | 2020/08/30 | 项目结构化调整  | adsionli |
-| 2020/09/01 | 完成相关前端视图代码构建 | adionli |
-| 2020/09/05 | 整体代码优化，解耦，分模块 | adionli |
-| 2020/09/07 | 关于Billboard的gif图片的实现与部分其他代码整理 | adionli |
-| 2020/09/10 | 完善并学习entity中的操作 | adionli |
-| 2020/09/14 | 完善dataSource操作 | adionli |
-| 2020/09/16 | 学习并使用ScreenSpaceEventHandler完成部分操作 | adionli |
-| 2020/09/21 | 完成多边形动态绘制，使用CallbackProperty进行操作 | adionli |
+| 2020/09/01 | 完成相关前端视图代码构建 | adsionli |
+| 2020/09/05 | 整体代码优化，解耦，分模块 | adsionli |
+| 2020/09/07 | 关于Billboard的gif图片的实现与部分其他代码整理 | adsionli |
+| 2020/09/10 | 完善并学习entity中的操作 | adsionli |
+| 2020/09/14 | 完善dataSource操作 | adsionli |
+| 2020/09/16 | 学习并使用ScreenSpaceEventHandler完成部分操作 | adsionli |
+| 2020/09/21 | 完成多边形动态绘制，使用CallbackProperty进行操作 | adsionli |
+| 2020/09/23 | 完成折线段动态绘制，使用CallbackProperty进行操作 | adsionli |
+| 2020/09/24 | 完成折线段长度计算 | adsionli |
+| 2020/09/26 | 完成多边形面积计算 | adsionli |
+| 2020/09/27 | 优化代码结构 | adsionli |
+| 2020/09/28 | 完成鹰眼地图的构建 | adsionli |
 
 
 ### 开发内容简介
