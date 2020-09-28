@@ -1,17 +1,18 @@
 <template>
 <div id="container" class="box">
-    <div id="cesiumContainer"></div>
+    <div id="cesiumContainer">
+        <div id="overview" class="leaflet-control-minimap"></div>
+    </div>
 </div>
 </template>
 
 <script>
-import token from '@/config/token.js'
 import EventHandle from '@/plugin/eventHandle/index.js'
 import ViewerCreate from '@/plugin/viewer/index.js'
 import DrawPolygon from '@/plugin/entity/polygon.js'
 import DrawPolyline from '@/plugin/entity/polyline.js'
-// import * as Cesium from 'cesium/Cesium'
 import CesiumNavigation from 'adsionli-navigation'
+import Handle from '@/plugin/handle/handle.js'
 export default {
     name: 'cesiumPage',
     data() {
@@ -22,7 +23,6 @@ export default {
     },
     mounted() {
         let _this = this
-        var TDU_Key = token
         var cesiumContainer = document.getElementById('cesiumContainer')
         var viewerCreate = new ViewerCreate({
             Cesium: _this.Cesium,
@@ -41,6 +41,11 @@ export default {
         this.initNavigation(viewer)
         this.$store.commit('SET_VIEWER', viewer)
         this.clickForPosition(viewer)
+        let handle = new Handle();
+        handle.initOverview({
+            viewer: viewer,
+            L: this.L
+        })
     },
     methods: {
         /**
@@ -57,6 +62,14 @@ export default {
             this.handleEvent.setHandle()
             this.handleEvent.clickForPositionAndDescription()
             this.$store.commit('SET_VIEWER', viewer)
+        },
+        reset(viewer) {
+            this.$store.commit('SET_VIEWER', viewer)
+            this.$store.commit('SET_DYNAMIC', false)
+            this.$store.commit('SET_DRAW_TYPE', '')
+            this.$store.commit('SET_DRAW_STYLE', {
+                data: {},
+            })
         },
         /**
          * 动态绘制
@@ -76,12 +89,8 @@ export default {
                             drawPolygon.destroy()
                             _this.clickForPosition(viewer)
                             viewer = drawPolygon.reset()
-                            _this.$store.commit('SET_VIEWER', viewer)
-                            _this.$store.commit('SET_DYNAMIC', false)
-                            _this.$store.commit('SET_DRAW_TYPE', '')
-                            _this.$store.commit('SET_DRAW_STYLE', {
-                                data: {},
-                            })
+                            viewer.entities.add(evt)
+                            _this.reset(viewer);
                         },
                     })
                     drawPolygon.dynamicDraw()
@@ -94,12 +103,7 @@ export default {
                             drawPolyline.destroy()
                             viewer = drawPolyline.reset()
                             _this.clickForPosition(viewer)
-                            _this.$store.commit('SET_VIEWER', viewer)
-                            _this.$store.commit('SET_DYNAMIC', false)
-                            _this.$store.commit('SET_DRAW_TYPE', '')
-                            _this.$store.commit('SET_DRAW_STYLE', {
-                                data: {},
-                            })
+                            _this.reset(viewer);
                         },
                     })
                     drawPolyline.dynamicDraw()
@@ -115,15 +119,10 @@ export default {
          */
         initNavigation(viewer) {
             var options = {}
-            // 用于在使用重置导航重置地图视图时设置默认视图控制。接受的值是Cesium.Cartographic 和 Cesium.Rectangle.
             options.defaultResetView = this.Cesium.Cartographic.fromDegrees(103.84, 31.15, 7000000)
-            // 用于启用或禁用罗盘。true是启用罗盘，false是禁用罗盘。默认值为true。如果将选项设置为false，则罗盘将不会添加到地图中。
             options.enableCompass = true
-            // 用于启用或禁用缩放控件。true是启用，false是禁用。默认值为true。如果将选项设置为false，则缩放控件将不会添加到地图中。
             options.enableZoomControls = true
-            // 用于启用或禁用距离图例。true是启用，false是禁用。默认值为true。如果将选项设置为false，距离图例将不会添加到地图中。
             options.enableDistanceLegend = true
-            // 用于启用或禁用指南针外环。true是启用，false是禁用。默认值为true。如果将选项设置为false，则该环将可见但无效。
             options.enableCompassOuterRing = true
             CesiumNavigation(viewer, options)
         },
@@ -139,11 +138,9 @@ export default {
                 this.dynamicDrawGeometry()
             }
         },
-    },
+    }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 
 <style scoped>
 html,

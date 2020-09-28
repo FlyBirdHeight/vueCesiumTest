@@ -4,6 +4,7 @@ import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
 import 'default-passive-events'
+import '../src/css/overMap.css'
 // require('./plugin.js');
 
 import billboard from './plugin/billboard'
@@ -26,11 +27,14 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+Vue.prototype.L = L
+
 import * as Cesium from 'cesium/Cesium'
 Vue.prototype.Cesium = Cesium
 var widgets = require('cesium/Widgets/widgets.css');
 Vue.prototype.widgets = widgets
-
 
 import axios from 'axios'
 Vue.prototype.axios = axios

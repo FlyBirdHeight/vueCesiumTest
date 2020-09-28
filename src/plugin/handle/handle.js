@@ -1,3 +1,4 @@
+import OverMap from './overMap'
 class Handle {
     constructor() {
         this.Cesium = require('cesium/Cesium');
@@ -40,6 +41,69 @@ class Handle {
             }
         })
         this.labelList.push(label);
+    }
+
+    /**
+     * 清空文字
+     * @param {Object} viewer
+     */
+    removeAll(viewer) {
+        if (this.labelList.length == 0) {
+            return false;
+        }
+        for (let i = 0; i < this.labelList.length; i++) {
+            viewer.entities.remove(this.labelList[i])
+        }
+        return true;
+    }
+
+    /**
+     * 删除上一次文字
+     *  @param {Object} viewer
+     */
+    removeLast(viewer) {
+        if (this.labelList.length == 0) {
+            return false;
+        }
+        let returnData = viewer.entities.remove(this.labelList[this.labelList.length - 1]);
+        return returnData;
+    }
+
+    /**
+     * 初始化鹰眼
+     */
+    initOverview(arg) {
+        var url =
+            "http://mt0.google.cn/vt/lyrs=t,r&hl=zh-CN&gl=cn&x={x}&y={y}&z={z}";
+        var layer = new arg.L.TileLayer(url, {
+            minZoom: 0,
+            maxZoom: 20
+        });
+        var container = document.getElementById("overview");
+        var options = {
+            container: container,
+            toggleDisplay: true,
+            width: 150,
+            height: 150,
+            position: "topright",
+            aimingRectOptions: {
+                color: "#ff1100",
+                weight: 3
+            },
+            shadowRectOptions: {
+                color: "#0000AA",
+                weight: 1,
+                opacity: 0,
+                fillOpacity: 0
+            }
+        };
+        let overviewCtr = new OverMap({
+            layer: layer,
+            viewer: arg.viewer,
+            options: options,
+            L: arg.L
+        });
+        overviewCtr.init();
     }
 }
 

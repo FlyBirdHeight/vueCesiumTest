@@ -1,3 +1,6 @@
+import Handle from '../handle/handle';
+import MeasureArea from '../handle/measureArea';
+
 /**
  * 动态绘制多边形
  */
@@ -11,13 +14,16 @@ class DrawPolygon {
         this.Cesium = require('cesium/Cesium');
         this.callback = arg.callback;
         this.data = arg.data;
-        this._polygon = null;  //活动面
-        this._polygonLast = null;  //最后一个面
+        this._polygon = null; //活动面
+        this._polygonLast = null; //最后一个面
         this._positions = []; //活动点
-        this._entities_point = [];  //脏数据
-        this._entities_polygon = [];  //脏数据
+        this._entities_point = []; //脏数据
+        this._entities_polygon = []; //脏数据
         this._polygonData = null; //用户构造面
         this.handler = null;
+        this.handleAreaData = [];
+        this.handle = new Handle();
+        this.area = new MeasureArea()
     }
 
     /**
@@ -56,7 +62,7 @@ class DrawPolygon {
                 pixelSize: 5,
                 color: $this.data.polygon.material
             },
-            show: false
+            show: true
         });
         $this._entities_point.push(point);
         return point;
@@ -116,6 +122,16 @@ class DrawPolygon {
             }
             $this.createPoint(cartesian);
             $this._positions.push(cartesian);
+            $this.handleAreaData.push(cartesian);
+            if ($this.handleAreaData.length >= 3) {
+                var text = "表面积：" + $this.area.getArea($this.handleAreaData);
+                var centerPoint = $this.area.getCenterOfGravityPoint($this.handleAreaData);
+                $this.handle.removeLast($this.viewer);
+                $this.handle.addLabel($this.viewer,{
+                    position: centerPoint,
+                    text: text
+                });
+            }
         }, $this.Cesium.ScreenSpaceEventType.LEFT_CLICK);
         this.handler.setInputAction(function (evt) { //移动时绘制面
             if ($this._positions.length < 1) return;
@@ -127,6 +143,7 @@ class DrawPolygon {
             }
             $this._positions.pop();
             $this._positions.push(cartesian);
+
         }, $this.Cesium.ScreenSpaceEventType.MOUSE_MOVE);
         this.handler.setInputAction(function (evt) {
             if (!$this._polygon) return;
@@ -179,12 +196,11 @@ class DrawPolygon {
         for (var i = 0; i < this._entities_polygon.length; i++) {
             this.viewer.entities.remove(this._entities_polygon[i]);
         }
-        this._polygon = null;  //活动面
-        this._polygonLast = null;  //最后一个面
+        this._polygon = null; //活动面
+        this._polygonLast = null; //最后一个面
         this._positions = []; //活动点
-        this._entities_point = [];  //脏数据
-        this._entities_polygon = [];  //脏数据
-        this.viewer.entities.add(this._polygonLast)
+        this._entities_point = []; //脏数据
+        this._entities_polygon = []; //脏数据
         this._polygonData = null; //用户构造面
 
         return this.viewer;
@@ -206,8 +222,8 @@ class DrawPolygon {
         outlineColor = this.data.polygon.outlineColor
 
         let Cesium = this.Cesium;
-        this.data.polygon.material = new Cesium.Color(Number(color[0])/255, Number(color[1])/255, Number(color[2])/255, Number(color[3]))
-        this.data.polygon.outlineColor = new Cesium.Color(Number(outlineColor[0])/255, Number(outlineColor[1])/255, Number(outlineColor[2])/255)
+        this.data.polygon.material = new Cesium.Color(Number(color[0]) / 255, Number(color[1]) / 255, Number(color[2]) / 255, Number(color[3]))
+        this.data.polygon.outlineColor = new Cesium.Color(Number(outlineColor[0]) / 255, Number(outlineColor[1]) / 255, Number(outlineColor[2]) / 255)
     }
 }
 

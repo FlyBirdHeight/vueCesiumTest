@@ -14,8 +14,8 @@ class MeasureArea {
      * @returns {Number} angle
      */
     angle(p1, p2, p3) {
-        var firstAngle = Bearing(p2, p1);
-        var secondAngle = Bearing(p2, p3);
+        var firstAngle = this.Bearing(p2, p1);
+        var secondAngle = this.Bearing(p2, p3);
         var angle = firstAngle - secondAngle;
         if (angle < 0) {
             angle += 360;
@@ -58,24 +58,24 @@ class MeasureArea {
         geodesic.setEndPoints(point1cartographic, point2cartographic);
         var distance = geodesic.surfaceDistance;
         //返回两点之间的距离
-        distance = Math.sqrt(Math.pow(s, 2) + Math.pow(point2cartographic.height - point1cartographic.height, 2));
+        distance = Math.sqrt(Math.pow(distance, 2) + Math.pow(point2cartographic.height - point1cartographic.height, 2));
         return distance;
     }
 
     /**
-     * 拆分三角曲面
+     * 计算面积
      * @param {*} points 
      */
-    split(points) {
+    getArea(points) {
         var res = 0;
         //拆分三角曲面
         for (var i = 0; i < points.length - 2; i++) {
             var j = (i + 1) % points.length;
             var k = (i + 2) % points.length;
-            var totalAngle = Angle(points[i], points[j], points[k]);
+            var totalAngle = this.angle(points[i], points[j], points[k]);
 
-            var dis_temp1 = distance(points[j], points[0]);
-            var dis_temp2 = distance(points[k], points[0]);
+            var dis_temp1 = this.distance(points[j], points[0]);
+            var dis_temp2 = this.distance(points[k], points[0]);
             res += dis_temp1 * dis_temp2 * Math.sin(totalAngle) / 2;
             // console.log(res);
         }
@@ -86,6 +86,18 @@ class MeasureArea {
         }
 
         return res;
+    }
+
+    /**
+     * 获取图形重心
+     * @param {Array} mPoints
+     */
+    getCenterOfGravityPoint(mPoints) {
+        var centerPoint = mPoints[0];
+        for (var i = 1; i < mPoints.length; i++) {
+            centerPoint = this.Cesium.Cartesian3.midpoint(centerPoint, mPoints[i], new this.Cesium.Cartesian3());
+        }
+        return centerPoint;
     }
 }
 

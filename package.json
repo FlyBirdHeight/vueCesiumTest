@@ -14,12 +14,14 @@
     "core-js": "^3.6.5",
     "default-passive-events": "^2.0.0",
     "element-ui": "^2.13.2",
+    "leaflet": "^1.7.1",
     "libgif": "^0.0.3",
     "register-service-worker": "^1.7.1",
     "sass": "^1.26.10",
     "sass-loader": "^9.0.3",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
+    "vue2-leaflet": "^2.5.2",
     "vuex": "^3.4.0"
   },
   "devDependencies": {
