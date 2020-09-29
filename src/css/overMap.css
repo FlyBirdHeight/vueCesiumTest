@@ -3,8 +3,8 @@
     width: 150px;
     height: 150px;
     position: absolute;
-    right: 10px;
-    bottom: 25px;
+    left: 10px;
+    top: 100px;
 }
 
 .leaflet-control-minimap {

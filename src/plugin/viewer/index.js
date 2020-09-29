@@ -29,6 +29,7 @@ class ViewerCreate {
         viewer.animation.container.style.display = 'none'
         viewer._cesiumWidget._creditContainer.style.display = 'none'
         viewer.scene.debugShowFramesPerSecond = true
+        viewer.scene.globe.depthTestAgainstTerrain = true;
 
         return viewer;
     }
