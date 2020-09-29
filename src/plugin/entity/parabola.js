@@ -4,6 +4,7 @@
 class DrawParabola {
     constructor(arg) {
         this.arg = arg;
+        this.data = arg.data;
         this.Cesium = undefined;
         this.duration = undefined;
         this.color = undefined;
@@ -11,6 +12,7 @@ class DrawParabola {
         this._color = undefined;
         this._colorSubscription = undefined;
         this._definitionChanged = undefined;
+        this.pointArr = [];
     }
 
     /**
@@ -19,7 +21,7 @@ class DrawParabola {
     ParabolaProperty() {
         this._definitionChanged = new Cesium.Event();
         this.viewer = this.arg.viewer;
-        this.Cesium = require('cesium/Cesium');
+        this.Cesium = this.arg.Cesium;
         this.duration = this.arg.duration;
         this.color = this.arg.color;
         this._time = (new Date()).getTime();
@@ -82,7 +84,7 @@ class DrawParabola {
 
         this.Cesium.ParabolaProperty = this.ParabolaProperty;
         this.Cesium.Material.ParabolaPropertyType = 'ParabolaProperty';
-        this.Cesium.Material.ParabolaPropertyImage = '';
+        this.Cesium.Material.ParabolaPropertyImage = '../../img/parabola_line.png';
         //这个其实就是opengl或者是webgl中的东西了，设置其材质，可以在opengl中查看到，是顶点着色器那一块的知识
         this.Cesium.Material.ParabolaPropertySource = "czm_material czm_getMaterial(czm_materialInput materialInput)\n\
         {\n\
@@ -109,7 +111,110 @@ class DrawParabola {
                 return true;
             }
         })
-        
+    }
+
+    /**
+     * 抛物线方程的实现
+     */
+    parabolaEquation(options, resultOut) {
+        //抛物线方程 y=-(4h/L^2)*x^2+h x^2前的系数为-时，开口向下，且越大，开口越大
+        //抛物线顶点高度
+        var height = options.height && options.height > 5000 ? options.height : 5000;
+        let distance_lon = Math.abs(options.pt1.lon - options.pt2.lon);
+        let distance_lat = Math.abs(options.pt1.lat - options.pt2.lat);
+        //横纵间距大小
+        var length = distance_lon > distance_lat ? distance_lon : distance_lat;
+        var num = options.num && options.num > 50 ? options.num : 50;
+        var result = [];
+        var dlt = length / num;
+        if (distance_lon > distance_lat) {
+            var delLat = (options.pt2.lat - options.pt1.lat) / num;
+            if (options.pt1.lon - options.pt2.lon > 0) {
+                dlt = -dlt;
+            }
+            for (var i = 0; i < num; i++) {
+                var tempH = height - Math.pow((-0.5 * length + Math.abs(dlt) * i), 2) * 4 * height / Math.pow(length, 2);
+                var lon = options.pt1.lon + dlt * i;
+                var lat = options.pt1.lat + delLat * i;
+                result.push([lon, lat, tempH]);
+            }
+        } else {
+            var delLon = (options.pt2.lon - options.pt1.lon) / num;
+            if (options.pt1.lat - options.pt2.lat > 0) {
+                dlt = -dlt;
+            }
+            for (var i = 0; i < num; i++) {
+                var tempH = height - Math.pow((-0.5 * length + Math.abs(dlt) * i), 2) * 4 * height / Math.pow(length, 2);
+                var lon = options.pt1.lon + delLon * i;
+                var lat = options.pt1.lat + dlt * i;
+                result.push([lon, lat, tempH]);
+            }
+        }
+
+        if (resultOut != undefined) {
+            resultOut = result;
+        }
+        return result;
+    }
+
+    /**
+     * 完成Cesium扩展Property
+     */
+    createProperty() {
+        this.ParabolaProperty();
+        this.defineProperty();
+        this.setDefineProperty();
+    }
+
+    /**
+     * 
+     */
+    createParabola() {
+        let _this = this;
+        var material = new this.Cesium.ParabolaProperty(this.data.color, this.data.time);
+        for (let i = 0; i < this.data.endPoint.length; i++) {
+            var points = this.parabolaEquation({
+                pt1: this.data.center,
+                pt2: this.data.endPoint[i],
+                height: this.data.height,
+                num: this.data.num
+            });
+            for (var i = 0; i < points.length; i++) {
+                pointArr.push(points[i][0], points[i][1], points[i][2]);
+            }
+            this.viewer.entities.add({
+                id: 'ParabolaLength:' + j + '  ' + this.data.id,
+                name: 'Parabola:' + j + '   ' + this.data.name,
+                description: this.data.description,
+                polyline: {
+                    positions: Cesium.Cartesian3.fromDegreesArrayHeights(pointArr),
+                    width: 2,
+                    material: material
+                }
+            });
+        }
+        this.viewer.entities.add({
+            id: 'centerPoint',
+            name: '起始点',
+            description: '流动纹理线的起始点',
+            position: _this.Cesium.Cartesian3.fromDegrees(center.lon, center.lat, 1),
+            point: {
+                pixelSize: 6,
+                color: _this.Cesium.Color.BLUE
+            }
+        });
+        for (var i = 0; i < this.data.endPoint.length; i++) {
+            this.viewer.entities.add({
+                id: 'endPoint:'+i,
+                name: '终止点:'+i,
+                description: '流动纹理线的终止点',
+                position: _this.Cesium.Cartesian3.fromDegrees(this.data.endPoint[i].lon, this.data.endPoint[i].lat, 1),
+                point: {
+                    pixelSize: 6,
+                    color: Cesium.Color.RED
+                }
+            });
+        }
     }
 }
 
