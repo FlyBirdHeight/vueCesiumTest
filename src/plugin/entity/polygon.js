@@ -36,7 +36,6 @@ class DrawPolygon {
             name: _this.data.name,
             description: _this.data.description,
             polygon: {
-                clampToGround: true,
                 show: true,
                 fill: true,
                 material: _this.data.polygon.material,

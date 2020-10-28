@@ -1,6 +1,6 @@
 import token from "../../config/token.js";
 var Cesium = require('cesium/Cesium');
-var TDU_Key = token;
+var TDU_Key = "f45e3d30658b0f0d4fbcee0421ef59af";
 
 function imageryLayersInit(viewer) {
     //在线天地图影像服务地址(墨卡托投影)
