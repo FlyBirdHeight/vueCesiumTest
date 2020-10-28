@@ -179,14 +179,12 @@ class DrawPolygon {
         for (var i = 0; i < this._entities_polygon.length; i++) {
             this.viewer.entities.remove(this._entities_polygon[i]);
         }
-        this._polygon = null;  //活动面
-        this._polygonLast = null;  //最后一个面
+        this._polygon = null; //活动面
+        this._polygonLast = null; //最后一个面
         this._positions = []; //活动点
-        this._entities_point = [];  //脏数据
-        this._entities_polygon = [];  //脏数据
-        this.viewer.entities.add(this._polygonLast)
+        this._entities_point = []; //脏数据
+        this._entities_polygon = []; //脏数据
         this._polygonData = null; //用户构造面
-
         return this.viewer;
     }
 

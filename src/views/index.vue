@@ -58,6 +58,14 @@ export default {
             this.handleEvent.clickForPositionAndDescription()
             this.$store.commit('SET_VIEWER', viewer)
         },
+        reset(viewer) {
+            this.$store.commit('SET_VIEWER', viewer)
+            this.$store.commit('SET_DYNAMIC', false)
+            this.$store.commit('SET_DRAW_TYPE', '')
+            this.$store.commit('SET_DRAW_STYLE', {
+                data: {},
+            })
+        },
         /**
          * 动态绘制
          */
@@ -76,12 +84,8 @@ export default {
                             drawPolygon.destroy()
                             _this.clickForPosition(viewer)
                             viewer = drawPolygon.reset()
-                            _this.$store.commit('SET_VIEWER', viewer)
-                            _this.$store.commit('SET_DYNAMIC', false)
-                            _this.$store.commit('SET_DRAW_TYPE', '')
-                            _this.$store.commit('SET_DRAW_STYLE', {
-                                data: {},
-                            })
+                            viewer.entities.add(evt)
+                            _this.reset(viewer);
                         },
                     })
                     drawPolygon.dynamicDraw()
@@ -94,12 +98,7 @@ export default {
                             drawPolyline.destroy()
                             viewer = drawPolyline.reset()
                             _this.clickForPosition(viewer)
-                            _this.$store.commit('SET_VIEWER', viewer)
-                            _this.$store.commit('SET_DYNAMIC', false)
-                            _this.$store.commit('SET_DRAW_TYPE', '')
-                            _this.$store.commit('SET_DRAW_STYLE', {
-                                data: {},
-                            })
+                            _this.reset(viewer);
                         },
                     })
                     drawPolyline.dynamicDraw()
