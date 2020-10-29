@@ -1,9 +1,11 @@
 <template>
   <div id="app">
     <toolbar></toolbar>
-    <router-view/>
     <left-side></left-side>
     <right-side></right-side>
+    <main-windows></main-windows>
+    <set-windows></set-windows>
+    <router-view/>
   </div>
 </template>
 
@@ -11,11 +13,15 @@
 import toolbar from '@/views/toolbar/index'
 import LeftSide from '@/views/toolbar/LeftSide'
 import RightSide from '@/views/toolbar/RightSide'
+import MainWindows from '@/views/windows/main.vue'
+import SetWindows from '@/views/windows/set.vue'
 export default {
   components: {
     toolbar,
     LeftSide,
-    RightSide
+    RightSide,
+    MainWindows,
+    SetWindows
   }
 }
 </script>

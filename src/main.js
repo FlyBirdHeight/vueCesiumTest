@@ -31,6 +31,8 @@ Vue.prototype.Cesium = Cesium
 var widgets = require('cesium/Widgets/widgets.css');
 Vue.prototype.widgets = widgets
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
 
 import axios from 'axios'
 Vue.prototype.axios = axios
