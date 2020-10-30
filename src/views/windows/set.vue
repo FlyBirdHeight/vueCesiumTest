@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="toolbar">
-      <div class="toolbar-first" id="styleSet">
+      <div class="toolbar-first hidden" id="styleSet">
         <div class="style">
           <div class="style-title" @click="showStyle()">
             <span
@@ -74,7 +74,7 @@
           </div>
         </div>
       </div>
-      <div class="toolbar-second hidden" id="positionSet" style="height:100%">
+      <div class="toolbar-second" id="positionSet" style="height:100%">
         <div class="position" style="height:100%">
           <div class="position-title" @click="showPosition()">
             <span
@@ -90,33 +90,77 @@
             <span>坐标列表</span>
           </div>
           <div class="position-list" id="position-list">
-            <div id="position-list-member1">
-              <div class="position-list-member-title">
-                <div class="position-list-member-sub-title">
-                  <span
-                    class="iconfont icon-jianhao"
-                    style="font-size:12px;margin:0 5px 0 5px"
-                    id="hidePositionMember1"
-                  ></span>
-                  <span
-                    class="iconfont icon-jiahao hidden"
-                    style="font-size:12px;margin:0 5px 0 5px"
-                    id="showPositionMember1"
-                  ></span>
-                  <span>第1点</span>
-                  <span class="iconfont icon-circle-jiahao"></span>
-                  <span class="iconfont icon-lajitong"></span>
-                </div>
-              </div>
-              <div class="position-list-member-data">
-
-              </div>
-            </div>
           </div>
         </div>
       </div>
       <div class="toolbar-third hidden" id="classSet">
-        <div class="class"></div>
+        <div class="class-title" @click="showClassInfo()">
+          <span
+            class="iconfont icon-jianhao"
+            style="font-size:12px;margin:0 5px 0 5px"
+            id="hideClassInfoAll"
+          ></span>
+          <span
+            class="iconfont icon-jiahao hidden"
+            style="font-size:12px;margin:0 5px 0 5px"
+            id="showClassInfoAll"
+          ></span>
+          <span>样式信息</span>
+        </div>
+        <div class="class-list" id="class-info-list">
+          <table
+            id="class-info-table"
+            border="1"
+            cellspacing="0"
+            cellpadding="0"
+          >
+            <tbody>
+              <tr id="position-point-lon-1" style="height:40px;">
+                <td style="padding-left:5px;width:40%;font-size:12px">类型:</td>
+                <td style="padding-left:5px">
+                  <span style="font-size:13px;font-weight:bolder">墙体</span>
+                </td>
+              </tr>
+              <tr id="position-point-lon-1" style="height:40px;">
+                <td style="padding-left:5px;width:40%;font-size:12px">高程:</td>
+                <td style="padding-left:5px">
+                  <input
+                    id="class-info-current-height"
+                    type="number"
+                    value=""
+                    class="form-control"
+                    style="margin-right:10px;width:90%;height:24px"
+                  />
+                </td>
+              </tr>
+              <tr id="position-point-lon-1" style="height:40px;">
+                <td style="padding-left:5px;width:40%;font-size:12px">
+                  是否填充:
+                </td>
+                <td style="padding-left:5px">
+                  <label class="radio-inline">
+                    <input
+                      type="radio"
+                      name="entity-fill"
+                      id="entity-fill-true"
+                      value="true"
+                    />
+                    是
+                  </label>
+                  <label class="radio-inline">
+                    <input
+                      type="radio"
+                      name="entity-fill"
+                      id="entity-fill-false"
+                      value="false"
+                    />
+                    否
+                  </label>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
     <div class="bottom">
@@ -124,19 +168,23 @@
         <li
           style="margin-left:10px"
           id="setStyle"
-          class="active bottom-list-li"
+          class="bottom-list-li"
           @click="setActive('style')"
         >
           属性
         </li>
         <li
-          class="bottom-list-li"
+          class="bottom-list-li active"
           id="setPosition"
           @click="setActive('position')"
         >
           坐标
         </li>
-        <li class="bottom-list-li" id="setClass" @click="setActive('class')">
+        <li
+          class="bottom-list-li"
+          id="setClass"
+          @click="setActive('class')"
+        >
           样式
         </li>
       </ul>
@@ -145,12 +193,38 @@
 </template>
 
 <script>
+
 export default {
+  mounted() {
+    setPositionPoint();
+  },
+  data() {
+    return {
+      
+    };
+  },
   methods: {
+    /**
+     * 样式页，控制展示样式信息
+     */
+    showClassInfo() {
+      if ($("#class-info-list").hasClass("hidden")) {
+        $("#class-info-list").removeClass("hidden");
+        $("#showClassInfoAll").addClass("hidden");
+        $("#hideClassInfoAll").removeClass("hidden");
+      } else {
+        $("#class-info-list").addClass("hidden");
+        $("#hideClassInfoAll").addClass("hidden");
+        $("#showClassInfoAll").removeClass("hidden");
+      }
+    },
     /**
      * 坐标页，控制展示全部坐标点
      */
-    showPosition() {},
+    showPosition() {
+      
+    },
+
     /**
      * 属性页，展示和收起属性列表
      */
@@ -205,7 +279,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 /**
 * 关闭icon的样式
 */
@@ -355,6 +429,38 @@ export default {
   .position-list-member-title {
   background: #1c3b3a;
   height: 25px;
+}
+/**
+* 坐标页，滚动轴样式修改
+*/
+.navDataSet .toolbar .toolbar-second .position .position-list::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width: 3px;
+  /*高宽分别对应横竖滚动条的尺寸*/
+  height: 1px;
+}
+
+.navDataSet .toolbar .toolbar-second .position .position-list::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 3px;
+  background-color: rgb(97, 93, 93);
+}
+
+.navDataSet .toolbar .toolbar-second .position .position-list::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+}
+/**
+* 样式页，标题样式
+*/
+.navDataSet .toolbar .toolbar-third .class-title {
+  background-color: #1c3b3a;
+  width: 100%;
+  height: 30px;
+  line-height: 28px;
+  cursor: pointer;
 }
 /**
 * 底部样式
