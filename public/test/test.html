@@ -1,0 +1,82 @@
+<div
+id="position-list-member1"
+style="border-top: 1px solid rgb(255, 255, 255);"
+>
+<div class="position-list-member-title">
+  <div
+    @click="closePosition(1)"
+    style="cursor: pointer;width:50%;display:inline-block"
+  >
+    <span
+      class="iconfont icon-jianhao"
+      style="font-size:12px;margin:0 5px 0 5px"
+      id="hidePositionMember1"
+    ></span>
+    <span
+      class="iconfont icon-jiahao hidden"
+      style="font-size:12px;margin:0 5px 0 5px"
+      id="showPositionMember1"
+    ></span>
+    <span>第1点</span>
+  </div>
+  <div style="float:right;padding-right:5px">
+    <span
+      class="iconfont icon-21"
+      style="cursor: pointer;font-size:15px;margin-right:3px"
+      @click="addPositionPoint"
+    ></span>
+    <span
+      class="iconfont icon-ashbin"
+      style="cursor: pointer;font-size:15px"
+      @click="removePositionPoint(1)"
+    ></span>
+  </div>
+</div>
+<div id="position-list-member1-info">
+  <table
+    id="position-point-table-1"
+    border="1"
+    cellspacing="0"
+    cellpadding="0"
+  >
+    <tbody>
+      <tr id="position-point-lon-1" style="height:40px;">
+        <td style="padding-left:5px;width:30%">经度:</td>
+        <td style="padding-left:5px">
+          <input
+            id="position-point-lon-data-1"
+            type="text"
+            value=""
+            class="form-control"
+            style="margin:10px;width:80%;height:28px"
+          />
+        </td>
+      </tr>
+      <tr id="position-point-lat-1" style="height:40px;">
+        <td style="padding-left:5px;width:30%">纬度:</td>
+        <td style="padding-left:5px">
+          <input
+            id="position-point-lat-data-1"
+            type="text"
+            value=""
+            class="form-control"
+            style="margin:10px;width:80%;height:28px"
+          />
+        </td>
+      </tr>
+      <tr id="position-point-height-1" style="height:40px;">
+        <td style="padding-left:5px;width:30%">高度:</td>
+        <td style="padding-left:5px">
+          <input
+            id="position-point-height-data-1"
+            type="text"
+            value=""
+            class="form-control"
+            style="margin:10px;width:80%;height:28px"
+          />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
