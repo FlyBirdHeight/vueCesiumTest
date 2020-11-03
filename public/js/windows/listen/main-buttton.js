@@ -1,5 +1,3 @@
-class MainButton{
-
-}
-
-export default MainButton;
+/**
+* 本页种方法主要用来处理标绘页中的方法
+*/

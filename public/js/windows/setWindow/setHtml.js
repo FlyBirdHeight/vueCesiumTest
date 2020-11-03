@@ -1,3 +1,9 @@
+/**
+* 本页中的方法主要用来处理各个栏目中，动态Html添加的操作
+*/
+/**
+ * 模拟数据
+ */
 var attrData = {
     attr: [{
             type: "index_id",
@@ -49,7 +55,7 @@ var attrData = {
     classInfo: [{
             type: "entity_type",
             des: "类型",
-            data: "墙体"
+            data: "墙体",
         },
         {
             type: "entity_current_height",
@@ -65,6 +71,16 @@ var attrData = {
             type: "entity_outline",
             des: "是否边框",
             data: true
+        },
+        {
+            type:"entity_closed",
+            des:"是否闭合",
+            data: false,
+        },
+        {
+            type:"entity_outline",
+            des:"是否边框",
+            data: false,
         }
     ]
 };
@@ -84,7 +100,7 @@ function setPositionPoint() {
                        id="hidePositionMember` + (data[i].id) + `"></span>
                    <span class="iconfont icon-jiahao hidden" style="font-size:12px;margin:0 5px 0 5px"
                        id="showPositionMember` + (data[i].id) + `"></span>
-                   <span id="position-point-title-`+ data[i].id +`">第` + (data[i].id) + `点</span>
+                   <span id="position-point-title-` + data[i].id + `">第` + (data[i].id) + `点</span>
                </div>
                <div style="float:right;padding-right:5px">
                    <span class="iconfont icon-21" style="cursor: pointer;font-size:15px;margin-right:3px"
@@ -94,27 +110,24 @@ function setPositionPoint() {
                </div>
            </div>
            <div id="position-list-member` + (data[i].id) + `-info">
-               <table id="position-point-table-1" border="1" cellspacing="0" cellpadding="0">
+               <table id="position-point-table-1" border="1" cellspacing="0" cellpadding="0" style="border:solid #fff 1px">
                    <tbody>
                        <tr id="position-point-lon-` + (data[i].id) + `" style="height:40px;">
                            <td style="padding-left:5px;width:30%">经度:</td>
                            <td style="padding-left:5px">
-                               <input id="position-point-lon-data-` + (data[i].id) + `" type="text" value="` + data[i].lon + `" class="form-control"
-                                   style="margin:10px;width:80%;height:28px" />
+                               <input id="position-point-lon-data-` + (data[i].id) + `" type="text" value="` + data[i].lon + `" class="form-control set-html-info-input" />
                            </td>
                        </tr>
                        <tr id="position-point-lat-` + (data[i].id) + `" style="height:40px;">
                            <td style="padding-left:5px;width:30%">纬度:</td>
                            <td style="padding-left:5px">
-                               <input id="position-point-lat-data-` + (data[i].id) + `" type="text" value="` + data[i].lat + `" class="form-control"
-                                   style="margin:10px;width:80%;height:28px" />
+                               <input id="position-point-lat-data-` + (data[i].id) + `" type="text" value="` + data[i].lat + `" class="form-control set-html-info-input"/>
                            </td>
                        </tr>
                        <tr id="position-point-height-` + (data[i].id) + `" style="height:40px;">
                            <td style="padding-left:5px;width:30%">高度:</td>
                            <td style="padding-left:5px">
-                               <input id="position-point-height-data-` + (data[i].id) + `" type="text" value="` + data[i].height + `" class="form-control"
-                                   style="margin:10px;width:80%;height:28px" />
+                               <input id="position-point-height-data-` + (data[i].id) + `" type="text" value="` + data[i].height + `" class="form-control set-html-info-input"/>
                            </td>
                        </tr>
                    </tbody>
@@ -124,3 +137,13 @@ function setPositionPoint() {
        `);
     }
 };
+
+/**
+ * 根据选择的集合体，动态添加html数据
+ */
+function sysncSetHtml(){
+    var drawHtml = getDifferentForm(attrData.classInfo);
+    for(let i = 0;i < drawHtml.length; i++){
+        $('#classInfoList').append(drawHtml[i]);
+    }
+}

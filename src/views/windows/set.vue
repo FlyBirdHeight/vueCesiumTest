@@ -51,8 +51,7 @@
                       id="plot_style_name"
                       type="text"
                       value=""
-                      class="form-control"
-                      style="margin:10px;width:80%"
+                      class="form-control set-html-info-input"
                     />
                   </td>
                 </tr>
@@ -64,8 +63,8 @@
                   <td style="padding-left:10px">
                     <textarea
                       id="plot_style_remark"
-                      class="form-control"
-                      style="height:60px;resize: none;margin:10px;width:80%"
+                      class="form-control set-html-info-textarea"
+                      style="height:60px;resize: none;"
                     ></textarea>
                   </td>
                 </tr>
@@ -74,7 +73,7 @@
           </div>
         </div>
       </div>
-      <div class="toolbar-second" id="positionSet" style="height:100%">
+      <div class="toolbar-second hidden" id="positionSet" style="height:100%">
         <div class="position" style="height:100%">
           <div class="position-title" @click="showPosition()">
             <span
@@ -89,11 +88,10 @@
             ></span>
             <span>坐标列表</span>
           </div>
-          <div class="position-list" id="position-list">
-          </div>
+          <div class="position-list" id="position-list"></div>
         </div>
       </div>
-      <div class="toolbar-third hidden" id="classSet">
+      <div class="toolbar-third" id="classSet" style="height:100%">
         <div class="class-title" @click="showClassInfo()">
           <span
             class="iconfont icon-jianhao"
@@ -113,27 +111,27 @@
             border="1"
             cellspacing="0"
             cellpadding="0"
+            style="border:solid #fff 1px;"
           >
-            <tbody>
-              <tr id="position-point-lon-1" style="height:40px;">
+            <tbody id="classInfoList">
+              <tr id="type" style="height:40px;">
                 <td style="padding-left:5px;width:40%;font-size:12px">类型:</td>
                 <td style="padding-left:5px">
                   <span style="font-size:13px;font-weight:bolder">墙体</span>
                 </td>
               </tr>
-              <tr id="position-point-lon-1" style="height:40px;">
-                <td style="padding-left:5px;width:40%;font-size:12px">高程:</td>
+              <tr id="current_height" style="height:40px;">
+                <td style="padding-left:5px;width:40%;font-size:12px">墙高:</td>
                 <td style="padding-left:5px">
                   <input
-                    id="class-info-current-height"
+                    id="class_info_entity_current_height"
                     type="number"
-                    value=""
-                    class="form-control"
-                    style="margin-right:10px;width:90%;height:24px"
+                    value="50"
+                    class="form-control set-html-info-input"
                   />
                 </td>
               </tr>
-              <tr id="position-point-lon-1" style="height:40px;">
+              <tr id="fill" style="height:40px;">
                 <td style="padding-left:5px;width:40%;font-size:12px">
                   是否填充:
                 </td>
@@ -142,8 +140,9 @@
                     <input
                       type="radio"
                       name="entity-fill"
-                      id="entity-fill-true"
+                      id="class_info_fill_true"
                       value="true"
+                      checked
                     />
                     是
                   </label>
@@ -151,8 +150,195 @@
                     <input
                       type="radio"
                       name="entity-fill"
-                      id="entity-fill-false"
+                      id="class_info_fill_false"
                       value="false"
+                    />
+                    否
+                  </label>
+                </td>
+              </tr>
+              <tr id="fill_type" style="height:40px;">
+                <td style="padding-left:5px;width:40%;font-size:12px">
+                  填充类型:
+                </td>
+                <td style="padding-left:5px">
+                  <select
+                    class="form-control set-html-info-select"
+                    id="class_info_fill_type"
+                  >
+                    <option value="color">纯色</option>
+                    <option value="carton">动画</option>
+                    <option value="mesh">网格</option>
+                    <option value="2D">条纹</option>
+                    <option value="3D">棋盘</option>
+                  </select>
+                </td>
+              </tr>
+              <tr id="color" style="height:40px;">
+                <td style="padding-left:5px;width:40%;font-size:12px">
+                  颜色:
+                </td>
+                <td style="padding-left:5px">
+                  <input
+                    id="class_info_color"
+                    type="color"
+                    value="50"
+                    class="form-control set-html-info-input"
+                  />
+                </td>
+              </tr>
+              <tr id="closed" style="height:40px;">
+                <td style="padding-left:5px;width:40%;font-size:12px">
+                  是否闭合:
+                </td>
+                <td style="padding-left:5px">
+                  <label class="radio-inline">
+                    <input
+                      type="radio"
+                      name="entity-closed"
+                      id="class_info_closed_true"
+                      value="true"
+                    />
+                    是
+                  </label>
+                  <label class="radio-inline">
+                    <input
+                      type="radio"
+                      name="entity-closed"
+                      id="class_info_closed_false"
+                      value="false"
+                      checked
+                    />
+                    否
+                  </label>
+                </td>
+              </tr>
+              <tr id="outline" style="height:40px;">
+                <td style="padding-left:5px;width:40%;font-size:12px">
+                  是否边框:
+                </td>
+                <td style="padding-left:5px">
+                  <label class="radio-inline">
+                    <input
+                      type="radio"
+                      name="entity-outline"
+                      id="class_info_outline_true"
+                      value="true"
+                      checked
+                    />
+                    是
+                  </label>
+                  <label class="radio-inline">
+                    <input
+                      type="radio"
+                      name="entity-outline"
+                      id="class_info_outline_false"
+                      value="false"
+                    />
+                    否
+                  </label>
+                </td>
+              </tr>
+              <tr id="alpha" style="height:40px">
+                <td style="padding-left:5px;width:40%;font-size:12px">
+                  透明度:
+                </td>
+                <td style="padding-left:5px">
+                  <div id="progress-alpha">
+                    <div id="progress-bg-alpha">
+                      <div id="progress-bar-alpha"></div>
+                    </div>
+                    <div id="progress-btn-alpha"></div>
+                    <div id="text-alpha">0%</div>
+                  </div>
+                </td>
+              </tr>
+              <tr id="color" style="height:40px;">
+                <td style="padding-left:5px;width:40%;font-size:12px">
+                  边框颜色:
+                </td>
+                <td style="padding-left:5px">
+                  <input
+                    id="class_info_color"
+                    type="color"
+                    value="50"
+                    class="form-control set-html-info-input"
+                  />
+                </td>
+              </tr>
+              <tr id="sight_distance" style="height:40px;">
+                <td style="padding-left:5px;width:40%;font-size:12px">
+                  是否按视距显示:
+                </td>
+                <td style="padding-left:5px">
+                  <label class="radio-inline">
+                    <input
+                      type="radio"
+                      name="entity-sight_distance"
+                      id="class_info_sight_distance_true"
+                      value="true"
+                    />
+                    是
+                  </label>
+                  <label class="radio-inline">
+                    <input
+                      type="radio"
+                      name="entity-sight_distance"
+                      id="class_info_sight_distance_false"
+                      value="false"
+                      checked
+                    />
+                    否
+                  </label>
+                </td>
+              </tr>
+              <tr id="sight_max_distance" style="height:40px;">
+                <td style="padding-left:5px;width:40%;font-size:12px">
+                  最大距离:
+                </td>
+                <td style="padding-left:5px">
+                  <input
+                    id="class_info_entity_sight_max_distance"
+                    type="number"
+                    value="100000"
+                    class="form-control set-html-info-input"
+                  />
+                </td>
+              </tr>
+              <tr id="sight_min_distance" style="height:40px;">
+                <td style="padding-left:5px;width:40%;font-size:12px">
+                  最小距离:
+                </td>
+                <td style="padding-left:5px">
+                  <input
+                    id="class_info_entity_sight_min_distance"
+                    type="number"
+                    value="0"
+                    class="form-control set-html-info-input"
+                  />
+                </td>
+              </tr>
+              <tr id="shadow" style="height:40px;">
+                <td style="padding-left:5px;width:40%;font-size:12px">
+                  是否阴影:
+                </td>
+                <td style="padding-left:5px">
+                  <label class="radio-inline">
+                    <input
+                      type="radio"
+                      name="entity-shadow"
+                      id="class_info_shadow_true"
+                      value="true"
+                    />
+                    是
+                  </label>
+                  <label class="radio-inline">
+                    <input
+                      type="radio"
+                      name="entity-shadow"
+                      id="class_info_shadow_false"
+                      value="false"
+                      checked
                     />
                     否
                   </label>
@@ -174,14 +360,14 @@
           属性
         </li>
         <li
-          class="bottom-list-li active"
+          class="bottom-list-li"
           id="setPosition"
           @click="setActive('position')"
         >
           坐标
         </li>
         <li
-          class="bottom-list-li"
+          class="bottom-list-li active"
           id="setClass"
           @click="setActive('class')"
         >
@@ -193,15 +379,9 @@
 </template>
 
 <script>
-
 export default {
   mounted() {
     setPositionPoint();
-  },
-  data() {
-    return {
-      
-    };
   },
   methods: {
     /**
@@ -218,13 +398,6 @@ export default {
         $("#showClassInfoAll").removeClass("hidden");
       }
     },
-    /**
-     * 坐标页，控制展示全部坐标点
-     */
-    showPosition() {
-      
-    },
-
     /**
      * 属性页，展示和收起属性列表
      */
@@ -278,220 +451,3 @@ export default {
   }
 };
 </script>
-
-<style>
-/**
-* 关闭icon的样式
-*/
-.navDataSet .title .closeIcon {
-  float: right;
-  padding-right: 10px;
-  color: #fff;
-}
-/**
-* 鼠标移动到x上的时候改变颜色
-*/
-.navDataSet .title .closeIcon:hover {
-  color: rgba(255, 255, 255, 0.5);
-}
-.hidden {
-  display: none;
-}
-/**
-* 主体样式
-*/
-.navDataSet {
-  height: 70%;
-  border: 1px solid rgba(32, 160, 255, 0.6);
-  border-radius: 5px;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #ffffff;
-  width: 20%;
-  z-index: 1000;
-  position: absolute;
-  left: 50px;
-  top: 15%;
-}
-/**
-* 标题样式
-*/
-.navDataSet .title {
-  height: 40px;
-  text-align: left;
-  line-height: 40px;
-  width: 100%;
-  border-bottom: 1px solid rgba(32, 160, 255, 0.3);
-}
-.navDataSet .title .title-set {
-  font-weight: bolder;
-  padding-left: 10px;
-  font-size: 15px;
-  font-family: Microsoft YaHei;
-}
-.col-xs-2,
-.col-xs-3 {
-  padding-left: 6px;
-  padding-right: 6px;
-}
-/**
-* 操作栏样式
-*/
-.navDataSet .operation {
-  height: 38px;
-  line-height: 38px;
-  width: 100%;
-  border-bottom: #dedede 1px solid;
-}
-.navDataSet .operation .operation-list-member {
-  height: 38px;
-  cursor: pointer;
-  text-align: center;
-}
-.navDataSet .operation .operation-list-member .tooltiptext {
-  visibility: hidden;
-  width: 90px;
-  background-color: rgba(255, 255, 255, 0.8);
-  font-size: 10px;
-  height: 25px;
-  line-height: 25px;
-  color: black;
-  text-align: center;
-  border-radius: 3px;
-  position: absolute;
-  z-index: 999;
-  top: -50%;
-  left: 60%;
-}
-.navDataSet .operation .operation-list-member:hover .tooltiptext {
-  visibility: visible;
-}
-.navDataSet .operation .operation-list-member .operation-list-member-icon {
-  color: #fff;
-  line-height: 38px;
-  font-size: 20px;
-  text-align: center;
-}
-/**
-* 数据操作框样式
-*/
-.navDataSet .toolbar {
-  height: calc(100% - 108px);
-  width: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-/**
-* 属性页，标题样式
-*/
-.navDataSet .toolbar .toolbar-first .style .style-title {
-  width: 100%;
-  height: 35px;
-  line-height: 35px;
-  background: #1c3b3a;
-  cursor: pointer;
-}
-/**
-* 表格样式
-*/
-.navDataSet .toolbar .toolbar-first .style .style-info table {
-  width: 100%;
-  border: 0;
-  font-size: 12px;
-}
-/**
-* 坐标页，标题样式
-*/
-.navDataSet .toolbar .toolbar-second .position .position-title {
-  width: 100%;
-  height: 35px;
-  line-height: 35px;
-  background: #1c3b3a;
-  cursor: pointer;
-}
-/**
-* 坐标页，最外层列表样式
-*/
-.navDataSet .toolbar .toolbar-second .position .position-list {
-  width: 100%;
-  height: calc(100% - 35px);
-  padding-left: 15px;
-  padding-right: 15px;
-  overflow-y: auto;
-}
-/**
-* 坐标页，列表内层样式
-*/
-.navDataSet
-  .toolbar
-  .toolbar-second
-  .position
-  .position-list
-  .position-list-member-title {
-  background: #1c3b3a;
-  height: 25px;
-}
-/**
-* 坐标页，滚动轴样式修改
-*/
-.navDataSet .toolbar .toolbar-second .position .position-list::-webkit-scrollbar {
-  /*滚动条整体样式*/
-  width: 3px;
-  /*高宽分别对应横竖滚动条的尺寸*/
-  height: 1px;
-}
-
-.navDataSet .toolbar .toolbar-second .position .position-list::-webkit-scrollbar-thumb {
-  /*滚动条里面小方块*/
-  border-radius: 3px;
-  background-color: rgb(97, 93, 93);
-}
-
-.navDataSet .toolbar .toolbar-second .position .position-list::-webkit-scrollbar-track {
-  /*滚动条里面轨道*/
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 3px;
-}
-/**
-* 样式页，标题样式
-*/
-.navDataSet .toolbar .toolbar-third .class-title {
-  background-color: #1c3b3a;
-  width: 100%;
-  height: 30px;
-  line-height: 28px;
-  cursor: pointer;
-}
-/**
-* 底部样式
-*/
-.navDataSet .bottom {
-  height: 30px;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-}
-.navDataSet .bottom ul {
-  background-color: rgba(63, 72, 84, 0.6);
-  border-top: 1px solid #ddd;
-  height: 30px;
-}
-.navDataSet .bottom .bottom-list-li {
-  display: inline-block;
-  width: 55px;
-  height: 26px;
-  text-align: center;
-  line-height: 26px;
-  color: grey;
-  box-sizing: border-box;
-  cursor: pointer;
-}
-.navDataSet .bottom .active {
-  color: #fff;
-  background-color: rgba(63, 72, 84, 0.6);
-  border: 1px solid #ddd;
-  border-radius: 0 0 6px 6px;
-  font-weight: bolder;
-  margin-top: -1px;
-}
-</style>

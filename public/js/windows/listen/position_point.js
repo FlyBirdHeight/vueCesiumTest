@@ -1,4 +1,8 @@
 /**
+* 本页中方法主要用来处理属性编辑栏中的坐标页内容
+*/
+
+/**
  * 坐标页，控制坐标点显示隐藏
  */
 function closePosition(number) {
@@ -24,14 +28,22 @@ function addPositionPoint() {
  * 坐标页，点处点击垃圾桶事件
  */
 function removePositionPoint(number) {
-    $('#position-list-member' + number).remove();
-    attrData.positionPoint.splice((number - 1), 1);
+    let removeId = number;
+    let spliceIndex = 0;
     let data = attrData.positionPoint;
     for (let index = 0; index < data.length; index++) {
-        console.log(data[index].id + "::::" + number);
-        if (data[index].id >= number) {
-            data[index].address = data[index].address - 1;
-            $('#position-point-title-' + data[index].id).text("第" + data[index].address + "点");
+        if (data[index].id == number) {
+            spliceIndex = index;
+            break;
         }
     }
+    $('#position-list-member' + removeId).remove();
+    attrData.positionPoint.splice(spliceIndex, 1);
+    for (let index = 0; index < attrData.positionPoint.length; index++) {
+        if (attrData.positionPoint[index].id > removeId) {
+            attrData.positionPoint[index].address = attrData.positionPoint[index].address - 1;
+            $('#position-point-title-' + attrData.positionPoint[index].id).text("第" + attrData.positionPoint[index].address + "点");
+        }
+    }
+    
 }
