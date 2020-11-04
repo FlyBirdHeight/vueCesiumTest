@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <!-- <toolbar></toolbar>
+    <toolbar></toolbar>
     <left-side></left-side>
-    <right-side></right-side> -->
+    <right-side></right-side>
     <main-windows></main-windows>
     <set-windows></set-windows>
     <router-view/>

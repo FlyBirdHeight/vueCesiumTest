@@ -111,7 +111,7 @@
             border="1"
             cellspacing="0"
             cellpadding="0"
-            style="border:solid #fff 1px;"
+            style="border:solid #fff 1px;width:100%"
           >
             <tbody id="classInfoList">
               <tr id="type" style="height:40px;">

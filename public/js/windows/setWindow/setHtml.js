@@ -1,6 +1,6 @@
 /**
-* 本页中的方法主要用来处理各个栏目中，动态Html添加的操作
-*/
+ * 本页中的方法主要用来处理各个栏目中，动态Html添加的操作
+ */
 /**
  * 模拟数据
  */
@@ -73,13 +73,13 @@ var attrData = {
             data: true
         },
         {
-            type:"entity_closed",
-            des:"是否闭合",
+            type: "entity_closed",
+            des: "是否闭合",
             data: false,
         },
         {
-            type:"entity_outline",
-            des:"是否边框",
+            type: "entity_outline",
+            des: "是否边框",
             data: false,
         }
     ]
@@ -89,7 +89,6 @@ var attrData = {
  */
 function setPositionPoint() {
     let data = attrData.positionPoint;
-    console.log(data);
     for (let i = 0; i < data.length; i++) {
         attrData.positionPoint[i].address = attrData.positionPoint[i].id;
         $('#position-list').append(`
@@ -110,7 +109,7 @@ function setPositionPoint() {
                </div>
            </div>
            <div id="position-list-member` + (data[i].id) + `-info">
-               <table id="position-point-table-1" border="1" cellspacing="0" cellpadding="0" style="border:solid #fff 1px">
+               <table id="position-point-table-1" border="1" cellspacing="0" cellpadding="0" style="border:solid #fff 1px;width:100%">
                    <tbody>
                        <tr id="position-point-lon-` + (data[i].id) + `" style="height:40px;">
                            <td style="padding-left:5px;width:30%">经度:</td>
@@ -141,9 +140,75 @@ function setPositionPoint() {
 /**
  * 根据选择的集合体，动态添加html数据
  */
-function sysncSetHtml(){
+function sysncSetHtml() {
     var drawHtml = getDifferentForm(attrData.classInfo);
-    for(let i = 0;i < drawHtml.length; i++){
+    for (let i = 0; i < drawHtml.length; i++) {
         $('#classInfoList').append(drawHtml[i]);
+    }
+}
+
+/**
+ * 动态添加标绘页数据
+ */
+function setHtmlToMainList(type) {
+    clearPlottingMainList();
+    switch (type) {
+        case 'pointLabel':
+            $.getJSON("../../../data/plotting.json", function(data){
+                let pointLabel = data.point_label;
+                for (let i = 0; i < pointLabel.length; i++) {
+                    drawHtmlToMainList(pointLabel[i], type, i);
+                }
+            })
+            break;
+        case 'icon':
+            $.getJSON("../../../data/plotting.json", function(data){
+                let iconList = data.icon_list;
+                for (let i = 0; i < iconList.length; i++) {
+                    drawHtmlToMainList(iconList[i], type, i);
+                }
+            })
+            break;
+        case 'smallModel':
+            break;
+        case '2D':
+            break;
+        case '3D':
+            break;
+        case 'militaryPlotting':
+            break;
+        default:
+            break;
+    }
+}
+/**
+ * 标绘页html参数绘制实现
+ */
+function drawHtmlToMainList(data, type, index) {
+    switch (type) {
+        case 'pointLabel':
+            $('#select-draw-list').append(
+                `<div class="col-xs-3 sys-draw" id="draw-point-label-` + index + `" onclick="drawOnCesiumGlobeByPointLabel(` + index + `)">
+                    <image src="`+ data.image_url + `" style="width: 100%;height: 100%;position: absolute;left: 0;"></image>
+                </div>`
+            );
+            break;
+        case 'icon':
+            $('#select-draw-list').append(
+                `<div class="col-xs-3 sys-draw" id="draw-icon-` + index + `" onclick="drawOnCesiumGlobeByIcon(` + index + `)">
+                    <i class="iconfont ` + data.class + `"></i>
+                </div>`
+            );
+            break;
+        case 'smallModel':
+            break;
+        case '2D':
+            break;
+        case '3D':
+            break;
+        case 'militaryPlotting':
+            break;
+        default:
+            break;
     }
 }

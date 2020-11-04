@@ -33,7 +33,7 @@
     <div class="toolbar">
       <div class="toolbar-first" id="addPlot">
         <div class="select">
-          <select class="form-control select-form-control" id="select-data">
+          <select class="form-control select-form-control" id="select-draw-type">
             <option value="pointLabel">点及文字</option>
             <option value="icon">字体点</option>
             <option value="smallModel">小模型</option>
@@ -42,97 +42,8 @@
             <option value="militaryPlotting">军事标绘</option>
           </select>
         </div>
-        <div class="select_list">
-          <div class="col-xs-3 sys-draw">
-            <i class="iconfont icon-navigation"></i>
-          </div>
-          <div class="col-xs-3 sys-draw">
-            <i class="iconfont icon-navigation"></i>
-          </div>
-          <div class="col-xs-3 sys-draw">
-            <i class="iconfont icon-navigation"></i>
-          </div>
-          <div class="col-xs-3 sys-draw">
-            <i class="iconfont icon-navigation"></i>
-          </div>
-          <div class="col-xs-3 sys-draw">
-            <i class="iconfont icon-navigation"></i>
-          </div>
-          <div class="col-xs-3 sys-draw">
-            <i class="iconfont icon-navigation"></i>
-          </div>
-          <div class="col-xs-3 sys-draw">
-            <i class="iconfont icon-navigation"></i>
-          </div>
-          <div class="col-xs-3 sys-draw">
-            <i class="iconfont icon-navigation"></i>
-          </div>
-          <div class="col-xs-3 sys-draw">
-            <i class="iconfont icon-navigation"></i>
-          </div>
-          <div class="col-xs-3 sys-draw">
-            <i class="iconfont icon-navigation"></i>
-          </div>
-          <div class="col-xs-3 sys-draw">
-            <i class="iconfont icon-navigation"></i>
-          </div>
-          <div class="col-xs-3 sys-draw">
-            <i class="iconfont icon-navigation"></i>
-          </div>
-          <div class="col-xs-3 sys-draw">
-            <i class="iconfont icon-navigation"></i>
-          </div>
-          <div class="col-xs-3 sys-draw">
-            <i class="iconfont icon-navigation"></i>
-          </div>
-          <div class="col-xs-3 sys-draw">
-            <i class="iconfont icon-navigation"></i>
-          </div>
-          <div class="col-xs-3 sys-draw">
-            <i class="iconfont icon-navigation"></i>
-          </div>
-          <div class="col-xs-3 sys-draw">
-            <i class="iconfont icon-navigation"></i>
-          </div>
-          <div class="col-xs-3 sys-draw">
-            <i class="iconfont icon-navigation"></i>
-          </div>
-          <div class="col-xs-3 sys-draw">
-            <i class="iconfont icon-navigation"></i>
-          </div>
-          <div class="col-xs-3 sys-draw">
-            <i class="iconfont icon-navigation"></i>
-          </div>
-          <div class="col-xs-3 sys-draw">
-            <i class="iconfont icon-navigation"></i>
-          </div>
-          <div class="col-xs-3 sys-draw">
-            <i class="iconfont icon-navigation"></i>
-          </div>
-          <div class="col-xs-3 sys-draw">
-            <i class="iconfont icon-navigation"></i>
-          </div>
-          <div class="col-xs-3 sys-draw">
-            <i class="iconfont icon-navigation"></i>
-          </div>
-          <div class="col-xs-3 sys-draw">
-            <i class="iconfont icon-navigation"></i>
-          </div>
-          <div class="col-xs-3 sys-draw">
-            <i class="iconfont icon-navigation"></i>
-          </div>
-          <div class="col-xs-3 sys-draw">
-            <i class="iconfont icon-navigation"></i>
-          </div>
-          <div class="col-xs-3 sys-draw">
-            <i class="iconfont icon-navigation"></i>
-          </div>
-          <div class="col-xs-3 sys-draw">
-            <i class="iconfont icon-navigation"></i>
-          </div>
-          <div class="col-xs-3 sys-draw">
-            <i class="iconfont icon-navigation"></i>
-          </div>
+        <div class="select_list" id="select-draw-list">
+         
         </div>
       </div>
       <div class="toolbar_second hidden" id="fileList">

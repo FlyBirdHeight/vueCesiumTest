@@ -1,5 +1,3 @@
-
-
 .windows {
     height: 70%;
     border: 1px solid rgba(32, 160, 255, 0.6);
@@ -90,12 +88,14 @@
 .windows .toolbar .toolbar-first .select {
     margin: 10px 15px 0px 15px;
 }
+
 .windows .toolbar .toolbar-first .select .select-form-control {
     padding: 0px;
     border-radius: 2px;
-    background-color: rgba(63,72,84,.6);
+    background-color: rgba(63, 72, 84, .6);
     color: #fff
 }
+
 .windows .toolbar .toolbar-first .select_list .sys-draw {
     height: 60px;
     border: 1px solid #fff;
@@ -104,6 +104,11 @@
     line-height: 60px;
     background-color: rgba(63, 72, 84, 0.6);
     font-size: 1em;
+    cursor: pointer;
+}
+
+.windows .toolbar .toolbar-first .select_list .sys-draw:hover {
+    border: 2px solid rgb(51, 116, 224);
 }
 
 .col-xs-2,
