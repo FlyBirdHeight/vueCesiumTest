@@ -152,30 +152,46 @@ function sysncSetHtml() {
  */
 function setHtmlToMainList(type) {
     clearPlottingMainList();
+    let data = getSessionData('plotting');
+    if (typeof (data) == 'undefined') {
+        return false;
+    }
     switch (type) {
         case 'pointLabel':
-            $.getJSON("../../../data/plotting.json", function(data){
-                let pointLabel = data.point_label;
-                for (let i = 0; i < pointLabel.length; i++) {
-                    drawHtmlToMainList(pointLabel[i], type, i);
-                }
-            })
+            let pointLabel = data.point_label;
+            for (let i = 0; i < pointLabel.length; i++) {
+                drawHtmlToMainList(pointLabel[i], type, i);
+            }
             break;
         case 'icon':
-            $.getJSON("../../../data/plotting.json", function(data){
-                let iconList = data.icon_list;
-                for (let i = 0; i < iconList.length; i++) {
-                    drawHtmlToMainList(iconList[i], type, i);
-                }
-            })
+            let iconList = data.icon_list;
+            for (let i = 0; i < iconList.length; i++) {
+                drawHtmlToMainList(iconList[i], type, i);
+            }
             break;
         case 'smallModel':
+            let gltfList = data.gltf_list;
+            for (let i = 0; i < gltfList.length; i++) {
+                drawHtmlToMainList(gltfList[i], type, i);
+            }
             break;
         case '2D':
+            let twoList = data.two;
+            for (let i = 0; i < twoList.length; i++) {
+                drawHtmlToMainList(twoList[i], type, i);
+            }
             break;
         case '3D':
+            let threeList = data.three;
+            for (let i = 0; i < threeList.length; i++) {
+                drawHtmlToMainList(threeList[i], type, i);
+            }
             break;
         case 'militaryPlotting':
+            let militaryList = data.military;
+            for (let i = 0; i < militaryList.length; i++) {
+                drawHtmlToMainList(militaryList[i], type, i);
+            }
             break;
         default:
             break;
@@ -189,24 +205,44 @@ function drawHtmlToMainList(data, type, index) {
         case 'pointLabel':
             $('#select-draw-list').append(
                 `<div class="col-xs-3 sys-draw" id="draw-point-label-` + index + `" onclick="drawOnCesiumGlobeByPointLabel(` + index + `)">
-                    <image src="`+ data.image_url + `" style="width: 100%;height: 100%;position: absolute;left: 0;"></image>
+                    <image src="` + data.image_url + `" style="width: 100%;height: 100%;position: absolute;left: 0;"></image>
                 </div>`
             );
             break;
         case 'icon':
             $('#select-draw-list').append(
-                `<div class="col-xs-3 sys-draw" id="draw-icon-` + index + `" onclick="drawOnCesiumGlobeByIcon(` + index + `)">
+                `<div class="col-xs-3 sys-draw" id="draw-icon-` + index + `" onclick="drawOnCesiumGlobeByIcon(` + index + `)" style="color: #f1f509">
                     <i class="iconfont ` + data.class + `"></i>
                 </div>`
             );
             break;
         case 'smallModel':
+            $('#select-draw-list').append(
+                `<div class="col-xs-3 sys-draw" id="draw-gltf-` + index + `" onclick="drawOnCesiumGlobeByGltf(` + index + `)">
+                    <image src="` + data.image_url + `" style="width: 100%;height: 100%;position: absolute;left: 0;"></image>
+                </div>`
+            );
             break;
         case '2D':
+            $('#select-draw-list').append(
+                `<div class="col-xs-3 sys-draw" id="draw-two-` + index + `" onclick="drawOnCesiumGlobeByTwo(` + index + `)">
+                    <image src="` + data.image_url + `" style="width: 100%;height: 100%;position: absolute;left: 0;"></image>
+                </div>`
+            );
             break;
         case '3D':
+            $('#select-draw-list').append(
+                `<div class="col-xs-3 sys-draw" id="draw-three-` + index + `" onclick="drawOnCesiumGlobeByThree(` + index + `)">
+                    <image src="` + data.image_url + `" style="width: 100%;height: 100%;position: absolute;left: 0;"></image>
+                </div>`
+            );
             break;
         case 'militaryPlotting':
+            $('#select-draw-list').append(
+                `<div class="col-xs-3 sys-draw" id="draw-military-` + index + `" onclick="drawOnCesiumGlobeByMilitary(` + index + `)">
+                    <image src="` + data.image_url + `" style="width: 100%;height: 100%;position: absolute;left: 0;"></image>
+                </div>`
+            );
             break;
         default:
             break;

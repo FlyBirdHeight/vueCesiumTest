@@ -2,7 +2,7 @@
   <div class="navDataSet" id="navDataSet">
     <div class="title">
       <span class="title-set">属性编辑</span>
-      <span class="iconfont icon-close closeIcon" @click="closeSetting"></span>
+      <span class="iconfont icon-close closeIcon" onclick="closeSetting()"></span>
     </div>
     <div class="operation">
       <div class="col-xs-2 operation-list-member" id="openFile">
@@ -21,7 +21,7 @@
     <div class="toolbar">
       <div class="toolbar-first hidden" id="styleSet">
         <div class="style">
-          <div class="style-title" @click="showStyle()">
+          <div class="style-title" onclick="showStyle()">
             <span
               class="iconfont icon-jianhao"
               style="font-size:12px;margin:0 5px 0 5px"
@@ -73,9 +73,9 @@
           </div>
         </div>
       </div>
-      <div class="toolbar-second hidden" id="positionSet" style="height:100%">
+      <div class="toolbar-second" id="positionSet" style="height:100%">
         <div class="position" style="height:100%">
-          <div class="position-title" @click="showPosition()">
+          <div class="position-title" onclick="closeAllPosition()">
             <span
               class="iconfont icon-jianhao"
               style="font-size:12px;margin:0 5px 0 5px"
@@ -91,8 +91,8 @@
           <div class="position-list" id="position-list"></div>
         </div>
       </div>
-      <div class="toolbar-third" id="classSet" style="height:100%">
-        <div class="class-title" @click="showClassInfo()">
+      <div class="toolbar-third hidden" id="classSet" style="height:100%">
+        <div class="class-title" onclick="showClassInfo()">
           <span
             class="iconfont icon-jianhao"
             style="font-size:12px;margin:0 5px 0 5px"
@@ -355,21 +355,21 @@
           style="margin-left:10px"
           id="setStyle"
           class="bottom-list-li"
-          @click="setActive('style')"
+          onclick="setActive('style')"
         >
           属性
         </li>
         <li
-          class="bottom-list-li"
+          class="bottom-list-li active"
           id="setPosition"
-          @click="setActive('position')"
+          onclick="setActive('position')"
         >
           坐标
         </li>
         <li
-          class="bottom-list-li active"
+          class="bottom-list-li"
           id="setClass"
-          @click="setActive('class')"
+          onclick="setActive('class')"
         >
           样式
         </li>
@@ -380,74 +380,6 @@
 
 <script>
 export default {
-  mounted() {
-    setPositionPoint();
-  },
-  methods: {
-    /**
-     * 样式页，控制展示样式信息
-     */
-    showClassInfo() {
-      if ($("#class-info-list").hasClass("hidden")) {
-        $("#class-info-list").removeClass("hidden");
-        $("#showClassInfoAll").addClass("hidden");
-        $("#hideClassInfoAll").removeClass("hidden");
-      } else {
-        $("#class-info-list").addClass("hidden");
-        $("#hideClassInfoAll").addClass("hidden");
-        $("#showClassInfoAll").removeClass("hidden");
-      }
-    },
-    /**
-     * 属性页，展示和收起属性列表
-     */
-    showStyle() {
-      if ($("#hideStyle").hasClass("hidden")) {
-        $("#hideStyle").removeClass("hidden");
-        $("#showStyle").addClass("hidden");
-        $("#style-table").removeClass("hidden");
-      } else {
-        $("#hideStyle").addClass("hidden");
-        $("#showStyle").removeClass("hidden");
-        $("#style-table").addClass("hidden");
-      }
-    },
-    /**
-     * 关闭设置页面
-     */
-    closeSetting() {
-      $("#navDataSet").addClass("hidden");
-    },
-    /**
-     * 设置显示页面
-     */
-    setActive(type) {
-      this.resetActive();
-      switch (type) {
-        case "style":
-          $("#setStyle").addClass("active");
-          $("#styleSet").removeClass("hidden");
-          break;
-        case "position":
-          $("#positionSet").removeClass("hidden");
-          $("#setPosition").addClass("active");
-          break;
-        case "class":
-          $("#classSet").removeClass("hidden");
-          $("#setClass").addClass("active");
-          break;
-        default:
-          break;
-      }
-    },
-    resetActive() {
-      $("#setStyle").removeClass("active");
-      $("#setPosition").removeClass("active");
-      $("#setClass").removeClass("active");
-      $("#styleSet").addClass("hidden");
-      $("#positionSet").addClass("hidden");
-      $("#classSet").addClass("hidden");
-    }
-  }
+
 };
 </script>

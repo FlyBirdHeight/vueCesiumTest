@@ -1,7 +1,21 @@
 /**
-* 本页中方法主要用来处理属性编辑栏中的坐标页内容
-*/
+ * 本页中方法主要用来处理属性编辑栏中的坐标页内容
+ */
 
+/**
+ * 关闭全部坐标页 
+ */
+function closeAllPosition() {
+    if ($('#hidePositionAll').hasClass('hidden')) {
+        $('#hidePositionAll').removeClass('hidden');
+        $('#showPositionAll').addClass('hidden');
+        $('#position-list').removeClass('hidden');
+    } else {
+        $('#showPositionAll').removeClass('hidden');
+        $('#hidePositionAll').addClass('hidden');
+        $('#position-list').addClass('hidden');
+    }
+}
 /**
  * 坐标页，控制坐标点显示隐藏
  */
@@ -45,5 +59,5 @@ function removePositionPoint(number) {
             $('#position-point-title-' + attrData.positionPoint[index].id).text("第" + attrData.positionPoint[index].address + "点");
         }
     }
-    
+
 }
