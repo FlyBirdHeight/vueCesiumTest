@@ -10,7 +10,7 @@
         <span class="tooltiptext">定位</span>
       </div>
       <div class="col-xs-2 operation-list-member" id="deletePlot">
-        <i class="iconfont icon-file-open operation-list-member-icon"></i>
+        <i class="iconfont icon-ashbin operation-list-member-icon"></i>
         <span class="tooltiptext">删除</span>
       </div>
       <div class="col-xs-2 operation-list-member" id="saveFileInSet">
