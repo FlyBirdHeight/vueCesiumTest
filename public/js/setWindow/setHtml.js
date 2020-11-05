@@ -218,28 +218,28 @@ function drawHtmlToMainList(data, type, index) {
             break;
         case 'smallModel':
             $('#select-draw-list').append(
-                `<div class="col-xs-3 sys-draw" id="draw-gltf-` + index + `" onclick="drawOnCesiumGlobeByGltf(` + index + `)">
+                `<div class="col-xs-3 sys-draw" id="draw-gltf-` + index + `" onclick="drawOnCesiumGlobeByGltf(` + index + `)" title="`+ data.des +`">
                     <image src="` + data.image_url + `" style="width: 100%;height: 100%;position: absolute;left: 0;"></image>
                 </div>`
             );
             break;
         case '2D':
             $('#select-draw-list').append(
-                `<div class="col-xs-3 sys-draw" id="draw-two-` + index + `" onclick="drawOnCesiumGlobeByTwo(` + index + `)">
+                `<div class="col-xs-3 sys-draw" id="draw-two-` + index + `" onclick="drawOnCesiumGlobeByTwo(` + index + `)" title="`+ data.des +`">
                     <image src="` + data.image_url + `" style="width: 100%;height: 100%;position: absolute;left: 0;"></image>
                 </div>`
             );
             break;
         case '3D':
             $('#select-draw-list').append(
-                `<div class="col-xs-3 sys-draw" id="draw-three-` + index + `" onclick="drawOnCesiumGlobeByThree(` + index + `)">
+                `<div class="col-xs-3 sys-draw" id="draw-three-` + index + `" onclick="drawOnCesiumGlobeByThree(` + index + `)" title="`+ data.des +`">
                     <image src="` + data.image_url + `" style="width: 100%;height: 100%;position: absolute;left: 0;"></image>
                 </div>`
             );
             break;
         case 'militaryPlotting':
             $('#select-draw-list').append(
-                `<div class="col-xs-3 sys-draw" id="draw-military-` + index + `" onclick="drawOnCesiumGlobeByMilitary(` + index + `)">
+                `<div class="col-xs-3 sys-draw" id="draw-military-` + index + `" onclick="drawOnCesiumGlobeByMilitary(` + index + `)" title="`+ data.des +`">
                     <image src="` + data.image_url + `" style="width: 100%;height: 100%;position: absolute;left: 0;"></image>
                 </div>`
             );

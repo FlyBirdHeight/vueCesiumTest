@@ -1,36 +1,33 @@
 {
-    "point_label": [
-        {
+    "point_label": [{
         "type": "label",
         "image_url": "http://img.xslease.com/label.jpg"
-        }, {
-            "type": "point",
-            "image_url": "http://img.xslease.com/pointlbl.jpg"
-        }, {
-            "type": "billboard",
-            "image_url": "http://img.xslease.com/marklbl.jpg"
-        }, {
-            "type": "div-point",
-            "image_url": "http://img.xslease.com/tf.gif"
-        }, {
-            "type": "div-point",
-            "image_url": "http://img.xslease.com/divpoint.jpg"
-        }, {
-            "type": "billboard",
-            "image_url": "http://img.xslease.com/mark1.png"
-        }, {
-            "type": "billboard",
-            "image_url": "http://img.xslease.com/mark2.png"
-        }, {
-            "type": "billboard",
-            "image_url": "http://img.xslease.com/mark3.png"
-        }, {
-            "type": "point",
-            "image_url": "http://img.xslease.com/point.jpg"
-        }
-    ],
-    "icon_list": [
-        {
+    }, {
+        "type": "point",
+        "image_url": "http://img.xslease.com/pointlbl.jpg"
+    }, {
+        "type": "billboard",
+        "image_url": "http://img.xslease.com/marklbl.jpg"
+    }, {
+        "type": "div-point",
+        "image_url": "http://img.xslease.com/tf.gif"
+    }, {
+        "type": "div-point",
+        "image_url": "http://img.xslease.com/divpoint.jpg"
+    }, {
+        "type": "billboard",
+        "image_url": "http://img.xslease.com/mark1.png"
+    }, {
+        "type": "billboard",
+        "image_url": "http://img.xslease.com/mark2.png"
+    }, {
+        "type": "billboard",
+        "image_url": "http://img.xslease.com/mark3.png"
+    }, {
+        "type": "point",
+        "image_url": "http://img.xslease.com/point.jpg"
+    }],
+    "icon_list": [{
             "class": "icon-way",
             "image_url": "http://img.xslease.com/way.png"
         },
@@ -270,363 +267,341 @@
             "image_url": "icon-mubiao"
         }
     ],
-    "gltf_list": [
-        {
-            "type":"gltf",
-            "image_url":"http://img.xslease.com/wajueji.jpg",
-            "gltf_url":""
-        },{
-            "type":"gltf",
-            "image_url":"http://img.xslease.com/qzcar.jpg",
-            "gltf_url":""
-        },{
-            "type":"gltf",
-            "image_url":"http://img.xslease.com/qzcar.jpg",
-            "gltf_url":""
-        },{
-            "type":"gltf",
-            "image_url":"http://img.xslease.com/ship-05.jpg",
-            "gltf_url":""
-        },{
-            "type":"gltf",
-            "image_url":"http://img.xslease.com/railway-jiazi.jpg",
-            "gltf_url":""
-        },{
-            "type":"gltf",
-            "image_url":"http://img.xslease.com/tower.jpg",
-            "gltf_url":""
-        },{
-            "type":"gltf",
-            "image_url":"http://img.xslease.com/xiaofangche.jpg",
-            "gltf_url":""
-        },{
-            "type":"gltf",
-            "image_url":"http://img.xslease.com/xiaofangche.jpg",
-            "gltf_url":""
-        },{
-            "type":"gltf",
-            "image_url":"http://img.xslease.com/ship-09.jpg",
-            "gltf_url":""
-        },{
-            "type":"gltf",
-            "image_url":"http://img.xslease.com/ship-04.jpg",
-            "gltf_url":""
-        },{
-            "type":"gltf",
-            "image_url":"http://img.xslease.com/zhanji.jpg",
-            "gltf_url":""
-        },{
-            "type":"gltf",
-            "image_url":"http://img.xslease.com/ship-01.jpg",
-            "gltf_url":""
-        },{
-            "type":"gltf",
-            "image_url":"http://img.xslease.com/ship-03.jpg",
-            "gltf_url":""
-        },{
-            "type":"gltf",
-            "image_url":"http://img.xslease.com/ship-08.jpg",
-            "gltf_url":""
-        },{
-            "type":"gltf",
-            "image_url":"http://img.xslease.com/qiche.jpg",
-            "gltf_url":""
-        },{
-            "type":"gltf",
-            "image_url":"http://img.xslease.com/xiaofangyuan.jpg",
-            "gltf_url":""
-        },{
-            "type":"gltf",
-            "image_url":"http://img.xslease.com/gongren.jpg",
-            "gltf_url":""
-        },{
-            "type":"gltf",
-            "image_url":"http://img.xslease.com/gongren.jpg",
-            "gltf_url":""
-        },{
-            "type":"gltf",
-            "image_url":"http://img.xslease.com/feiji.jpg",
-            "gltf_url":""
-        },{
-            "type":"gltf",
-            "image_url":"http://img.xslease.com/jingche.jpg",
-            "gltf_url":""
-        },{
-            "type":"gltf",
-            "image_url":"http://img.xslease.com/fengche.jpg",
-            "gltf_url":""
-        }
-    ],
-    "two":[
-        {
-            "type":"polyline",
-            "image_url":"http://img.xslease.com/polyline.jpg",
-            "features":"normal",
+    "gltf_list": [{
+        "type": "gltf",
+        "image_url": "http://img.xslease.com/jingche.jpg",
+        "gltf_url": "",
+        "des": "警车"
+    }, {
+        "type": "gltf",
+        "image_url": "http://img.xslease.com/qiche.jpg",
+        "gltf_url": "",
+        "des": "汽车"
+    }, {
+        "type": "gltf",
+        "image_url": "http://img.xslease.com/xiaofangche.jpg",
+        "gltf_url": "",
+        "des": "消防车"
+    }, {
+        "type": "gltf",
+        "image_url": "http://img.xslease.com/wajueji.jpg",
+        "gltf_url": "",
+        "des": "挖掘机"
+    }, {
+        "type": "gltf",
+        "image_url": "http://img.xslease.com/qzcar.jpg",
+        "gltf_url": "",
+        "des": "起重车"
+    }, {
+        "type": "gltf",
+        "image_url": "http://img.xslease.com/zhanji.jpg",
+        "gltf_url": "",
+        "des": "战机"
+    }, {
+        "type": "gltf",
+        "image_url": "http://img.xslease.com/feiji.jpg",
+        "gltf_url": "",
+        "des": "飞机"
+    }, {
+        "type": "gltf",
+        "image_url": "http://img.xslease.com/ship-01.jpg",
+        "gltf_url": "",
+        "des": "渔船"
+    }, {
+        "type": "gltf",
+        "image_url": "http://img.xslease.com/ship-03.jpg",
+        "gltf_url": "",
+        "des": "煤炭船"
+    }, {
+        "type": "gltf",
+        "image_url": "http://img.xslease.com/ship-04.jpg",
+        "gltf_url": "",
+        "des": "拖轮"
+    }, {
+        "type": "gltf",
+        "image_url": "http://img.xslease.com/ship-05.jpg",
+        "gltf_url": "",
+        "des": "散货船"
+    }, {
+        "type": "gltf",
+        "image_url": "http://img.xslease.com/ship-08.jpg",
+        "gltf_url": "",
+        "des": "集装箱船"
+    }, {
+        "type": "gltf",
+        "image_url": "http://img.xslease.com/ship-09.jpg",
+        "gltf_url": "",
+        "des": "化工品船"
+    }, {
+        "type": "gltf",
+        "image_url": "http://img.xslease.com/xiaofangyuan.jpg",
+        "gltf_url": "",
+        "des": "消防员"
+    }, {
+        "type": "gltf",
+        "image_url": "http://img.xslease.com/gongren.jpg",
+        "gltf_url": "",
+        "des": "工人"
+    }, {
+        "type": "gltf",
+        "image_url": "http://img.xslease.com/railway-jiazi.jpg",
+        "gltf_url": "",
+        "des": "电线杆子"
+    }, {
+        "type": "gltf",
+        "image_url": "http://img.xslease.com/tower.jpg",
+        "gltf_url": "",
+        "des": "电线塔"
+    }, {
+        "type": "gltf",
+        "image_url": "http://img.xslease.com/fengche.jpg",
+        "gltf_url": "",
+        "des": "风力发电机"
+    }],
+    "two": [{
+            "type": "polyline",
+            "image_url": "http://img.xslease.com/polyline.jpg",
+            "features": "normal",
             "des": "折线段"
-        },{
-            "type":"polyline",
-            "image_url":"http://img.xslease.com/polyline.jpg",
-            "features":"closed",
+        }, {
+            "type": "polyline",
+            "image_url": "http://img.xslease.com/polyline.jpg",
+            "features": "closed",
             "des": "闭合折线段"
-        },{
-            "type":"polyline",
-            "image_url":"http://img.xslease.com/polyline_clampToGround.jpg",
-            "features":"clamp_polyline",
+        }, {
+            "type": "polyline",
+            "image_url": "http://img.xslease.com/polyline_clampToGround.jpg",
+            "features": "clamp_polyline",
             "des": "贴地折线段"
         },
         {
-            "type":"polyline",
-            "image_url":"http://img.xslease.com/polyline_flow.jpg",
-            "features":"flow",
+            "type": "polyline",
+            "image_url": "http://img.xslease.com/polyline_flow.jpg",
+            "features": "flow",
             "des": "流动折线段"
         },
         {
-            "type":"polyline",
-            "image_url":"http://img.xslease.com/polyline_flow2.jpg",
-            "features":"dynamic",
+            "type": "polyline",
+            "image_url": "http://img.xslease.com/polyline_flow2.jpg",
+            "features": "dynamic",
             "des": "动态折线段"
         },
         {
-            "type":"polyline",
-            "image_url":"http://img.xslease.com/curve.jpg",
-            "features":"curve",
+            "type": "polyline",
+            "image_url": "http://img.xslease.com/curve.jpg",
+            "features": "curve",
             "des": "曲线段"
         },
         {
-            "type":"polyline",
-            "image_url":"http://img.xslease.com/curve_clampToGround.jpg",
-            "features":"clamp_curve",
+            "type": "polyline",
+            "image_url": "http://img.xslease.com/curve_clampToGround.jpg",
+            "features": "clamp_curve",
             "des": "贴地曲线段"
         },
         {
-            "type":"corridor",
-            "image_url":"http://img.xslease.com/corridor.jpg",
-            "features":"normal",
+            "type": "corridor",
+            "image_url": "http://img.xslease.com/corridor.jpg",
+            "features": "normal",
             "des": "走廊"
         },
         {
-            "type":"corridor",
-            "image_url":"http://img.xslease.com/corridor_clampToGround.jpg",
-            "features":"clamp",
+            "type": "corridor",
+            "image_url": "http://img.xslease.com/corridor_clampToGround.jpg",
+            "features": "clamp",
             "des": "贴地走廊"
         },
         {
-            "type":"polygon",
-            "image_url":"http://img.xslease.com/polygon.jpg",
-            "features":"normal",
+            "type": "polygon",
+            "image_url": "http://img.xslease.com/polygon.jpg",
+            "features": "normal",
             "des": "面"
         },
         {
-            "type":"polygon",
-            "image_url":"http://img.xslease.com/polygon_clampToGround.jpg",
-            "features":"clamp",
+            "type": "polygon",
+            "image_url": "http://img.xslease.com/polygon_clampToGround.jpg",
+            "features": "clamp",
             "des": "贴地面"
         },
         {
-            "type":"rectangle",
-            "image_url":"http://img.xslease.com/rectangle.jpg",
-            "features":"normal",
+            "type": "rectangle",
+            "image_url": "http://img.xslease.com/rectangle.jpg",
+            "features": "normal",
             "des": "矩形"
         },
         {
-            "type":"rectangle",
-            "image_url":"http://img.xslease.com/rectangle_clampToGround.jpg",
-            "features":"clamp",
+            "type": "rectangle",
+            "image_url": "http://img.xslease.com/rectangle_clampToGround.jpg",
+            "features": "clamp",
             "des": "贴地矩形"
         },
         {
-            "type":"polygon",
-            "image_url":"http://img.xslease.com/plane.jpg",
-            "features":"plane",
+            "type": "polygon",
+            "image_url": "http://img.xslease.com/plane.jpg",
+            "features": "plane",
             "des": "平面"
         },
         {
-            "type":"polygon",
-            "image_url":"http://img.xslease.com/regular3.jpg",
-            "features":"triangle",
+            "type": "polygon",
+            "image_url": "http://img.xslease.com/regular3.jpg",
+            "features": "triangle",
             "des": "三角形"
         },
         {
-            "type":"polygon",
-            "image_url":"http://img.xslease.com/regular4.jpg",
-            "features":"square",
+            "type": "polygon",
+            "image_url": "http://img.xslease.com/regular4.jpg",
+            "features": "square",
             "des": "正方形"
         },
         {
-            "type":"polygon",
-            "image_url":"http://img.xslease.com/regular5.jpg",
-            "features":"pentagon",
+            "type": "polygon",
+            "image_url": "http://img.xslease.com/regular5.jpg",
+            "features": "pentagon",
             "des": "正五边形"
         },
         {
-            "type":"circle",
-            "image_url":"http://img.xslease.com/circle.jpg",
-            "features":"normal",
+            "type": "circle",
+            "image_url": "http://img.xslease.com/circle.jpg",
+            "features": "normal",
             "des": "圆"
         },
         {
-            "type":"circle",
-            "image_url":"http://img.xslease.com/circle_clampToGround.jpg",
-            "features":"clamp",
+            "type": "circle",
+            "image_url": "http://img.xslease.com/circle_clampToGround.jpg",
+            "features": "clamp",
             "des": "贴地圆"
         },
         {
-            "type":"circle",
-            "image_url":"http://img.xslease.com/circle_animation.jpg",
-            "features":"dynamic",
+            "type": "circle",
+            "image_url": "http://img.xslease.com/circle_animation.jpg",
+            "features": "dynamic",
             "des": "动态圆"
         },
         {
-            "type":"circle",
-            "image_url":"http://img.xslease.com/ellipse.jpg",
-            "features":"ellipse",
+            "type": "circle",
+            "image_url": "http://img.xslease.com/ellipse.jpg",
+            "features": "ellipse",
             "des": "椭圆"
         },
         {
-            "type":"circle",
-            "image_url":"http://img.xslease.com/ellipse_clampToGround.jpg",
-            "features":"clamp_ellipse",
+            "type": "circle",
+            "image_url": "http://img.xslease.com/ellipse_clampToGround.jpg",
+            "features": "clamp_ellipse",
             "des": "贴地椭圆"
         },
         {
-            "type":"circle",
-            "image_url":"http://img.xslease.com/sector.jpg",
-            "features":"sector",
+            "type": "circle",
+            "image_url": "http://img.xslease.com/sector.jpg",
+            "features": "sector",
             "des": "扇形"
         },
         {
-            "type":"circle",
-            "image_url":"http://img.xslease.com/lune.jpg",
-            "features":"lune",
+            "type": "circle",
+            "image_url": "http://img.xslease.com/lune.jpg",
+            "features": "lune",
             "des": "弓形"
         }
     ],
-    "three": [
-        {
-            "type":"",
-            "image_url":"",
-            "features":"",
-            "des": ""
-        },{
-            "type":"",
-            "image_url":"",
-            "features":"",
-            "des": ""
-        },{
-            "type":"",
-            "image_url":"",
-            "features":"",
-            "des": ""
-        },{
-            "type":"",
-            "image_url":"",
-            "features":"",
-            "des": ""
-        },{
-            "type":"",
-            "image_url":"",
-            "features":"",
-            "des": ""
-        },{
-            "type":"",
-            "image_url":"",
-            "features":"",
-            "des": ""
-        },{
-            "type":"",
-            "image_url":"",
-            "features":"",
-            "des": ""
-        },{
-            "type":"",
-            "image_url":"",
-            "features":"",
-            "des": ""
-        },{
-            "type":"",
-            "image_url":"",
-            "features":"",
-            "des": ""
-        },{
-            "type":"",
-            "image_url":"",
-            "features":"",
-            "des": ""
-        },{
-            "type":"",
-            "image_url":"",
-            "features":"",
-            "des": ""
-        },{
-            "type":"",
-            "image_url":"",
-            "features":"",
-            "des": ""
-        },{
-            "type":"",
-            "image_url":"",
-            "features":"",
-            "des": ""
-        },{
-            "type":"",
-            "image_url":"",
-            "features":"",
-            "des": ""
-        },{
-            "type":"",
-            "image_url":"",
-            "features":"",
-            "des": ""
-        },{
-            "type":"",
-            "image_url":"",
-            "features":"",
-            "des": ""
-        },{
-            "type":"",
-            "image_url":"",
-            "features":"",
-            "des": ""
-        }
-    ],
-    "military":[
-        {
-            "type":"military",
-            "image_url":"http://img.xslease.com/closeVurve.jpg",
-            "des":""
-        },{
-            "type":"military",
-            "image_url":"http://img.xslease.com/fineArrowYW.jpg",
-            "des":""
-        },{
-            "type":"military",
-            "image_url":"http://img.xslease.com/fineArrow.jpg",
-            "des":""
-        },{
-            "type":"military",
-            "image_url":"http://img.xslease.com/attackArrowPW.jpg",
-            "des":""
-        },{
-            "type":"military",
-            "image_url":"http://img.xslease.com/doubleArrow.jpg",
-            "des":""
-        },{
-            "type":"military",
-            "image_url":"http://img.xslease.com/attackArrow.jpg",
-            "des":""
-        },{
-            "type":"military",
-            "image_url":"http://img.xslease.com/straightArrow.jpg",
-            "des":""
-        },{
-            "type":"military",
-            "image_url":"http://img.xslease.com/gatheringPlace.jpg",
-            "des":""
-        },{
-            "type":"military",
-            "image_url":"http://img.xslease.com/attackArrowYW.jpg",
-            "des":""
-        }
-    ]
-
+    "three": [{
+        "type": "3d-wall",
+        "image_url": "http://img.xslease.com/wall.jpg",
+        "features": "normal",
+        "des": "墙体"
+    }, {
+        "type": "3d-wall",
+        "image_url": "http://img.xslease.com/wall.jpg",
+        "features": "closed",
+        "des": "闭合墙体"
+    }, {
+        "type": "3d-wall",
+        "image_url": "http://img.xslease.com/wall_fence.jpg",
+        "features": "dynamic",
+        "des": "动态墙体"
+    }, {
+        "type": "3d-wall",
+        "image_url": "http://img.xslease.com/wall_arrow.jpg",
+        "features": "dynamic_arrow",
+        "des": "动态箭头墙体"
+    }, {
+        "type": "3d-wall",
+        "image_url": "http://img.xslease.com/wall_tanhao.jpg",
+        "features": "image",
+        "des": "竖立图片(墙)"
+    }, {
+        "type": "3d-corridor",
+        "image_url": "http://img.xslease.com/extrudedCorridor.jpg",
+        "features": "normal",
+        "des": "拉伸走廊"
+    }, {
+        "type": "3d-polygon",
+        "image_url": "http://img.xslease.com/extrudedPolygon.jpg",
+        "features": "normal",
+        "des": "多边立体"
+    }, {
+        "type": "3d-polygon",
+        "image_url": "http://img.xslease.com/extrudedRectangle.jpg",
+        "features": "rectangle",
+        "des": "立方体"
+    }, {
+        "type": "3d-box",
+        "image_url": "http://img.xslease.com/box.jpg",
+        "features": "box",
+        "des": "盒子"
+    }, {
+        "type": "3d-cylinder",
+        "image_url": "http://img.xslease.com/extrudedCircle.jpg",
+        "features": "normal",
+        "des": "圆柱体"
+    }, {
+        "type": "3d-cylinder",
+        "image_url": "http://img.xslease.com/cylinder.jpg",
+        "features": "cone",
+        "des": "圆锥体"
+    }, {
+        "type": "3d-cylinder",
+        "image_url": "http://img.xslease.com/extrudedEellipse.jpg",
+        "features": "normal",
+        "des": "椭圆柱体"
+    }, {
+        "type": "3d-ellipsoid",
+        "image_url": "http://img.xslease.com/ellipsoid.jpg",
+        "features": "sphere",
+        "des": "球体"
+    }],
+    "military": [{
+        "type": "military",
+        "image_url": "http://img.xslease.com/closeVurve.jpg",
+        "des": "闭合曲面"
+    }, {
+        "type": "military",
+        "image_url": "http://img.xslease.com/fineArrowYW.jpg",
+        "des": "燕尾直箭头"
+    }, {
+        "type": "military",
+        "image_url": "http://img.xslease.com/fineArrow.jpg",
+        "des": "粗单尖直箭头"
+    }, {
+        "type": "military",
+        "image_url": "http://img.xslease.com/attackArrowPW.jpg",
+        "des": "平尾攻击箭头"
+    }, {
+        "type": "military",
+        "image_url": "http://img.xslease.com/doubleArrow.jpg",
+        "des": "钳击箭头"
+    }, {
+        "type": "military",
+        "image_url": "http://img.xslease.com/attackArrow.jpg",
+        "des": "燕尾攻击箭头"
+    }, {
+        "type": "military",
+        "image_url": "http://img.xslease.com/straightArrow.jpg",
+        "des": "粗直箭头"
+    }, {
+        "type": "military",
+        "image_url": "http://img.xslease.com/gatheringPlace.jpg",
+        "des": "集结地"
+    }, {
+        "type": "military",
+        "image_url": "http://img.xslease.com/attackArrowYW.jpg",
+        "des": "攻击箭头"
+    }]
 }
